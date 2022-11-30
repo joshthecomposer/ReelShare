@@ -7,13 +7,15 @@ DB = 'soundflaskio_schema'
 class File:
     def __init__(self, data):
         self.id = data['id']
+        self.user_id = data['user_id']
+        self.title = data['title']
         self.path = data['path']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
     @classmethod
     def save(cls, data):
-        query = "INSERT INTO files (user_id, path) VALUES (%(user_id)s , %(path)s)"
+        query = "INSERT INTO files (user_id, title, path) VALUES (%(user_id)s , %(title)s ,  %(path)s)"
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod

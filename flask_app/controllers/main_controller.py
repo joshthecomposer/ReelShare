@@ -35,6 +35,7 @@ def dashboard():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             data = {
                 'user_id' : session['user_id'],
+                'title' : request.form['title'],
                 'path' : f'users/{session["username"]}/{filename}'
             }
             File.save(data)

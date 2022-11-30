@@ -25,10 +25,13 @@
     <h1>Upload new File</h1>
     <form method=post enctype=multipart/form-data>
         <input type=file name=file>
+        <label for="title">Track Title:</label>
+        <input type="text" name="title">
         <input type=submit value=Upload>
     </form>
 
     {%for f in all_files%}
+        <p>{{f.title}}</p>
         <audio controls src="{{ url_for('static', filename=f.path) }}"></audio>
     {%endfor%}
 </body>
