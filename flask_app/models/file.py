@@ -17,13 +17,13 @@ class File:
     def save(cls, data):
         query = "INSERT INTO files (user_id, title, path) VALUES (%(user_id)s , %(title)s ,  %(path)s)"
         return connectToMySQL(DB).query_db(query, data)
-    
+
     @classmethod
     def get_all_files(cls, data):
         query = "SELECT * FROM files WHERE user_id = %(user_id)s"
         result = connectToMySQL(DB).query_db(query, data)
         return result
-    
+
     @staticmethod
     def allowed_file(filename):
         return '.' in filename and \

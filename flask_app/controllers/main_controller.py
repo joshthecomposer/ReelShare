@@ -4,8 +4,6 @@ from flask import render_template, redirect, request, flash, url_for, session
 from flask_app.models.file import File
 from werkzeug.utils import secure_filename
 
-
-
 @app.route('/')
 def index():
     if 'username' in session:
@@ -23,7 +21,7 @@ def dashboard():
             flash('No file')
             return redirect(request.url)
         file = request.files['file']
-        if file.filename == '':
+        if file.filename == '**':
             flash('Please select an audio file')
             print(request.url)
             return redirect(request.url)

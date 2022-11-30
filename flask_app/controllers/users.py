@@ -23,7 +23,7 @@ def register():
         'email': request.form['email'],
         'password': pw_hash
         }
-        
+
         user_id = user.User.save(data)
         session['user_id'] = user_id
         session['username'] = data['username']
