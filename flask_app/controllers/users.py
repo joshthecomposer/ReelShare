@@ -46,7 +46,7 @@ def login():
         session['form_tried'] = 'login'
         return redirect('/')
     session['username'] = user_exists[0]['username']
-    session['user_id'] = user_exists[0]['user_id']
+    session['user_id'] = user_exists[0]['id']
     return redirect('/dashboard')
 
 

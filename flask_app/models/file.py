@@ -17,10 +17,9 @@ class File:
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
-    def get_all_files(cls):
-        query = "SELECT * FROM files;"
-        result = connectToMySQL(DB).query_db(query)
-        print(result)
+    def get_all_files(cls, data):
+        query = "SELECT * FROM files WHERE user_id = %(user_id)s"
+        result = connectToMySQL(DB).query_db(query, data)
         return result
     
     @staticmethod

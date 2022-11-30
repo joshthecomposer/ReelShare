@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom/style.css') }}">
+    <title>SoundFlask.io</title>
+</head>
+<!-- <body class="bg-primary-custom">
+    <div class="nav">
+        <div class="container mt-4 d-flex justify-content-between align-items-center">
+            <h1 class="text-primary-custom">Sound<span class="text-secondary-custom">Flask</span>.io</h1>
+            <h4 class="text-primary-custom"><a href="/login">Login</a></h4>
+        </div>
+    </div> -->
+    {%with messages = get_flashed_messages()%}
+        {%if messages%}
+            {%for message in messages%}
+                <h1 class="text-danger">{{message}}</h1>
+            {%endfor%}
+        {%endif%}
+    {%endwith%}
+    <h1>Upload new File</h1>
+    <form method=post enctype=multipart/form-data>
+        <input type=file name=file>
+        <input type=submit value=Upload>
+    </form>
+
+    {%for f in all_files%}
+        <audio controls src="{{ url_for('static', filename=f.path) }}"></audio>
+    {%endfor%}
+</body>
+</html>

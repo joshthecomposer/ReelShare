@@ -39,12 +39,11 @@ def dashboard():
             }
             File.save(data)
         return redirect('/dashboard')
-    return render_template('upload.html')
-
-@app.route('/files')
-def view_files():
-    all_files = File.get_all_files()
-    return render_template('files.html', all_files=all_files)
+    data = {
+        'user_id' : session['user_id']
+    }
+    all_files = File.get_all_files(data)
+    return render_template('dashboard.html', all_files=all_files)
 
 @app.route('/clear')
 def clear_session():
