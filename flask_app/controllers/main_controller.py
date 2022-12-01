@@ -1,4 +1,4 @@
-import os
+import os, uuid
 from flask_app import app
 from flask import render_template, redirect, request, flash, url_for, session
 from flask_app.models.file import File
@@ -14,14 +14,13 @@ def index():
 def dashboard():
     if 'username' not in session:
         return redirect('/')
-    app.config['UPLOAD_FOLDER'] = f'flask_app/static/users/{session["username"]}'
     print(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file')
             return redirect(request.url)
         file = request.files['file']
-        if file.filename == '**':
+        if file.filename == '':
             flash('Please select an audio file')
             print(request.url)
             return redirect(request.url)
@@ -30,11 +29,14 @@ def dashboard():
             return redirect(request.url)
         if file and File.allowed_file(file.filename):
             filename = secure_filename(file.filename)
+            print ("filename uploaded is:", filename)
+            filename = str(session['user_id']) + "_" +  str(uuid.uuid4()) + "_" + filename
+            print("sanitized filename is :", filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             data = {
                 'user_id' : session['user_id'],
                 'title' : request.form['title'],
-                'path' : f'users/{session["username"]}/{filename}'
+                'path' : f'users/{filename}'
             }
             File.save(data)
         return redirect('/dashboard')
