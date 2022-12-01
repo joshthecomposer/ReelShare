@@ -54,7 +54,8 @@ def dashboard():
     
     all_reels = all_reels.reels
     for r in all_reels:
-        print("one reel", r.name)
+        print(f"reel: {r.name} tracks: {r.tracks}")
+        
     return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
 
 @app.route('/clear')

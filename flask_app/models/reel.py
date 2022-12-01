@@ -12,7 +12,7 @@ class Reel:
         self.updated_at = data['updated_at']
 
         self.tracks = []
-    
+
     @classmethod
     def save(cls, data):
         query = "INSERT INTO reels (user_id, name) VALUES (%(user_id)s, %(name)s)"
@@ -70,11 +70,13 @@ class Reel:
             one_reel = cls(data)
             data = {
                 'user_id' : row['user_id'],
-                'title' : row['title']
+                'title' : row['title'],
+                'name' : one_reel.name
             }
-            one_file = file.File.get_file_by_title(data)
-            one_reel.tracks.append(one_file)
+            
+            tracklist = file.File.get_tracklist(data)
+            for t in tracklist:
+                one_reel.tracks.append(t['path'])
             one_user.reels.append(one_reel)
         
-        print(one_user)
         return one_user

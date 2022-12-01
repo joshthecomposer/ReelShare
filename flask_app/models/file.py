@@ -34,4 +34,10 @@ class File:
         query = "SELECT files.id FROM files WHERE files.user_id = %(user_id)s AND title = %(title)s"
         return connectToMySQL(DB).query_db(query, data)
     
-    
+    @classmethod
+    def get_tracklist(cls, data):
+        query = """SELECT * FROM files 
+                    JOIN reel_list ON files.id = reel_list.file_id 
+                    JOIN reels ON reels.id = reel_list.reel_id 
+                    WHERE reels.name = %(name)s"""
+        return connectToMySQL(DB).query_db(query, data)
