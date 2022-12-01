@@ -3,7 +3,7 @@ from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
 
 ALLOWED_EXTENSIONS = {'wav', 'mp3', 'aif'}
-DB = 'soundflaskio_schema'
+DB = 'railway'
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 PASSWORD_REGEX = re.compile(r"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$")
 

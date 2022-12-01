@@ -2,7 +2,7 @@ from flask import flash
 from flask_app.config.mysqlconnection import connectToMySQL
 
 ALLOWED_EXTENSIONS = {'wav', 'mp3', 'aif'}
-DB = 'soundflaskio_schema'
+DB = 'railway'
 
 class File:
     def __init__(self, data):
