@@ -28,3 +28,10 @@ class File:
     def allowed_file(filename):
         return '.' in filename and \
             filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+            
+    @classmethod
+    def get_file_by_title(cls, data):
+        query = "SELECT files.id FROM files WHERE files.user_id = %(user_id)s AND title = %(title)s"
+        return connectToMySQL(DB).query_db(query, data)
+    
+    

@@ -12,11 +12,10 @@ class User:
         self.id = data['id']
         self.username = data['username']
         self.email = data['email']
-        self.password = data['password']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
         
-        self.folder = data['folder']
+        self.reels = []
         
     @staticmethod
     def validate(data):
@@ -51,7 +50,7 @@ class User:
     
     @classmethod
     def save(cls, data):
-        # folder = f'flask_app/static/users/{data["username"]}'
-        # os.mkdir(folder)
+        folder = f'flask_app/static/users/{data["username"]}'
+        os.mkdir(folder)
         query = 'INSERT INTO users (username, email, password) VALUES (%(username)s, %(email)s, %(password)s)'
         return connectToMySQL(DB).query_db(query, data)

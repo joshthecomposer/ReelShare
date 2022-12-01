@@ -2,6 +2,7 @@ import os, uuid
 from flask_app import app
 from flask import render_template, redirect, request, flash, url_for, session
 from flask_app.models.file import File
+from flask_app.models import reel
 from werkzeug.utils import secure_filename
 
 @app.route('/')
@@ -14,6 +15,7 @@ def index():
 def dashboard():
     if 'username' not in session:
         return redirect('/')
+    app.config['UPLOAD_FOLDER'] = f'flask_app/static/users/{session["username"]}'
     print(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
         if 'file' not in request.files:
@@ -36,7 +38,7 @@ def dashboard():
             data = {
                 'user_id' : session['user_id'],
                 'title' : request.form['title'],
-                'path' : f'users/{filename}'
+                'path' : f'users/{session["username"]}/{filename}'
             }
             File.save(data)
         return redirect('/dashboard')
@@ -44,7 +46,16 @@ def dashboard():
         'user_id' : session['user_id']
     }
     all_files = File.get_all_files(data)
-    return render_template('dashboard.html', all_files=all_files)
+    all_reels = reel.Reel.get_reels_with_tracks(data)
+    
+    if not all_reels:
+        all_reels = reel.Reel.get_reels(data)
+        return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
+    
+    all_reels = all_reels.reels
+    for r in all_reels:
+        print("one reel", r.name)
+    return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
 
 @app.route('/clear')
 def clear_session():

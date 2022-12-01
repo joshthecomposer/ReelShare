@@ -15,17 +15,42 @@
             <h4 class="text-primary-custom"><a href="/login">Login</a></h4>
         </div>
     </div> -->
+    <h1>Hello {{session['username']}}</h1>
     <h1>Upload new File</h1>
     <form method=post enctype=multipart/form-data>
         <input type=file name=file>
         <label for="title">Track Title:</label>
         <input type="text" name="title">
-        <input type=submit value=Upload>
+        <input type=submit value='Upload'>
     </form>
-
+    <h1>My files:</h1>
+    <hr>
     {%for f in all_files%}
         <p>{{f.title}}</p>
         <audio controls src="{{ url_for('static', filename=f.path) }}"></audio>
+        <hr>
     {%endfor%}
+
+    <h1>Create a new Reel</h1>
+    <form action="/create_reel" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" name="name">
+        <input type=submit value='Submit'>
+    </form>
+
+    <h1>My reels:</h1>
+    {%for r in all_reels%}
+        <p>{{r.name}}</p>
+        <hr>
+    {%endfor%}
+
+    <h1>Add Track to reel:</h1>
+    <form action="/save_track_to_reel" method="POST">
+        <label for="title">Track Title:</label>
+        <input type="text" name="title">
+        <label for="name">Reel Name:</label>
+        <input type="text" name="name">
+        <input type=submit value='Submit'>
+    </form>
 </body>
 </html>
