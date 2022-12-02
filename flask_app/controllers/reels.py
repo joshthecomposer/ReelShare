@@ -11,6 +11,10 @@ def create_reel():
     reel.Reel.save(data)
     return redirect('/dashboard')
 
+@app.route('/reel/create')
+def reel_creation_page():
+    return render_template('reel_creation.html')
+
 @app.route("/save_track_to_reel", methods=['POST'])
 def save_track_to_reel():
     data = {

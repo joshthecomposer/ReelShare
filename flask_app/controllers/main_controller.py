@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 
 @app.route('/')
 def index():
-    if 'username' in session:
-        return redirect('/dashboard')
+    # if 'username' in session:
+    #     return redirect('/dashboard')
     return render_template('landing.html')
 
 @app.route('/dashboard', methods=['GET', 'POST'])
@@ -18,6 +18,9 @@ def dashboard():
     app.config['UPLOAD_FOLDER'] = f'flask_app/static/users/{session["username"]}'
     print(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
+        if request.form['title'] == '':
+            flash('Please enter a title')
+            return redirect(request.url)
         if 'file' not in request.files:
             flash('No file')
             return redirect(request.url)

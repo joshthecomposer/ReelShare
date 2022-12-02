@@ -4,54 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap/bootstrap.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom/style.css') }}">
     <title>SoundFlask.io</title>
 </head>
-<!-- <body class="bg-primary-custom">
-    <div class="nav">
-        <div class="container mt-4 d-flex justify-content-between align-items-center">
-            <h1 class="text-primary-custom">Sound<span class="text-secondary-custom">Flask</span>.io</h1>
-            <h4 class="text-primary-custom"><a href="/login">Login</a></h4>
+<body>
+    <nav>
+        <div class="container">
+            <h1>SoundFlask.io</h1>
+            <p>{{session['username']}}'s</p>
+            <p>DASHBOARD</p>
+            <a href="/clear">LOGOUT</a>
         </div>
-    </div> -->
-    <h1>Hello {{session['username']}}</h1>
-    <hr>
-    <h1>Upload Audio:</h1>
-    <form method=post enctype=multipart/form-data>
-        <input type=file name=file>
-        <label for="title">Track Title:</label>
-        <input type="text" name="title">
-        <input type=submit value='Upload'>
-    </form>
-    <h1>My Tracks:</h1>
-    <hr>
-    {%for f in all_files%}
-        <p>{{f.title}}</p>
-        <audio controls src="{{ url_for('static', filename=f.path) }}"></audio>
-        <hr>
-    {%endfor%}
+    </nav>
+    <main>
+        <!-- <div class="container">
+            <h1>Create a new Reel</h1>
+            <form action="/create_reel" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" name="name">
+                <input type=submit value='Submit'>
+            </form>
 
-    <h1>Create a new Reel</h1>
-    <form action="/create_reel" method="POST">
-        <label for="name">Name:</label>
-        <input type="text" name="name">
-        <input type=submit value='Submit'>
-    </form>
-
-    <h1>My reels:</h1>
-    {%for r in all_reels%}
-        <p>{{r.name}}</p>
-        <hr>
-    {%endfor%}
-
-    <h1>Add Track to reel:</h1>
-    <form action="/save_track_to_reel" method="POST">
-        <label for="title">Track Title:</label>
-        <input type="text" name="title">
-        <label for="name">Reel Name:</label>
-        <input type="text" name="name">
-        <input type=submit value='Submit'>
-    </form>
+        </div> -->
+        <div class="container">
+            <div class="d-container">
+                    <div class="column">
+                            <h2>YOUR REELS</h2>
+                            {%for r in all_reels%}
+                            <a class="reel-a" href="#">
+                                <div class="reel-box">
+                                    <p class="reel-name">{{r.name}}</p>
+                                </div>
+                            </a>
+                            {%endfor%}
+                            <!-- <div class="reel-box">
+                                <p class="reel-name">Reel Name</p>
+                            </div> -->
+                            <a href="/reel/create">
+                                <button class="button-3">CREATE A REEL</button>
+                            </a>
+                    </div>
+                    <div class="column">
+                        <h2>YOUR TRACKS</h2>
+                        {%for f in all_files%}
+                        <div class="audio-box">
+                            <p>{{f.title}}</p>
+                            <audio controls src="{{ url_for('static', filename=f.path) }}"></audio>
+                        </div>
+                        {%endfor%}
+                        <div class="d-container">
+                            <div class="form-group">
+                                <h2>UPLOAD AUDIO</h2>
+                                <form method=post enctype=multipart/form-data>
+                                    <input class="d-form-control" type="text" name="title" placeholder="TITLE">
+                                    <input class="d-form-control" type=file name=file>
+                                    <div>
+                                        <button type="submit" class="button-3">Upload</button>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                        
+                    </div>
+            </div>
+        </div>
+    
+        <!-- <h1>Add Track to reel:</h1>
+        <form action="/save_track_to_reel" method="POST">
+            <label for="title">Track Title:</label>
+            <input type="text" name="title">
+            <label for="name">Reel Name:</label>
+            <input type="text" name="name">
+            <input type=submit value='Submit'>
+        </form> -->
+    </main>
 </body>
 </html>

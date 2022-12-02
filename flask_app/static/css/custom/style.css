@@ -10,6 +10,7 @@
     padding:  0;
     box-sizing: border-box;
     vertical-align: top;
+    color: white;
     /* outline: red 1px dashed; */
 }
 
@@ -36,6 +37,21 @@ nav {
     justify-content: center;
     gap: 1.5rem;
     margin: 0 5rem 0 5rem;
+}
+
+.d-container {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    color: white;
+    margin: 5rem 0 5rem 0;
+    width: 100%;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 nav .container {
@@ -162,6 +178,18 @@ form {
     font-size: 1.8rem;
 }
 
+.d-form-control {
+    width: 40rem;
+    height: 3rem;
+    margin-bottom: 1.5rem;
+    background-color: rgb(59, 53, 87);
+    /* background-color: transparent; */
+    margin-top: .5rem;
+    border-radius: 5px;
+    color: white;
+    padding: 0 5rem 0 5rem;
+    font-size: 1.8rem;
+}
 
 .form-h2 {
     margin-bottom: 1.5rem;
@@ -169,4 +197,52 @@ form {
 
 .form-subtext {
     margin-top: 1.5rem;
+}
+
+.reel-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem;
+    width: 400px;
+    height: 90px;
+    background-color: rgb(19,17,28);
+    margin: 3rem 0 3rem 0;
+    border-radius: 5px;
+}
+
+.reel-name {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+.reel-a {
+    text-decoration: none;
+}
+
+.reel-a .reel-box:hover {
+    background-color: rgba(59, 53, 87, 0.8);
+}
+
+input::file-selector-button {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    padding: 1rem 1.5rem;
+    font-family: Lato;
+    border-radius: 5px;
+}
+
+.audio-box {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0 1rem 0;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 90px;
+    background-color: rgb(19,17,28);
+    margin: 3rem 0 3rem 0;
+    border-radius: 5px;
 }
