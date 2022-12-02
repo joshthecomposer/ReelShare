@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 def index():
     if 'username' in session:
         return redirect('/dashboard')
-    return render_template('index.html')
+    return render_template('landing.html')
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
@@ -55,10 +55,18 @@ def dashboard():
     all_reels = all_reels.reels
     for r in all_reels:
         print(f"reel: {r.name} tracks: {r.tracks}")
-        
+
     return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
 
 @app.route('/clear')
 def clear_session():
     session.clear()
     return redirect('/')
+
+@app.route('/reel_view')
+def reel_view():
+    return render_template('reel_view.html')
+
+@app.route('/landing')
+def landing():
+    return render_template('landing.html')

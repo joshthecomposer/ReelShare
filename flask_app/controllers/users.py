@@ -49,4 +49,8 @@ def login():
     session['user_id'] = user_exists[0]['id']
     return redirect('/dashboard')
 
+@app.route('/view/login')
+def view_login():
+    return render_template('view_login.html')
+
 

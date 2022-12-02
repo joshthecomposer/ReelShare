@@ -16,14 +16,15 @@
         </div>
     </div> -->
     <h1>Hello {{session['username']}}</h1>
-    <h1>Upload new File</h1>
+    <hr>
+    <h1>Upload Audio:</h1>
     <form method=post enctype=multipart/form-data>
         <input type=file name=file>
         <label for="title">Track Title:</label>
         <input type="text" name="title">
         <input type=submit value='Upload'>
     </form>
-    <h1>My files:</h1>
+    <h1>My Tracks:</h1>
     <hr>
     {%for f in all_files%}
         <p>{{f.title}}</p>
