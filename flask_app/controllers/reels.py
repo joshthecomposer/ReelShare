@@ -36,3 +36,16 @@ def save_track_to_reel():
     
     reel.Reel.save_track_to_reel(data)
     return redirect('/dashboard')
+
+@app.route("/reel/view/<int:id>")
+def reeL_view(id):
+    data = {
+        "user_id" : session['user_id']
+    }
+    one_user = reel.Reel.get_reels_with_tracks(data)
+    for r in one_user.reels:
+        if r.id == id:
+            one_reel = r
+    all_files = file.File.get_all_files(data)
+    print("one_reel trax ==: ", one_reel.tracks)
+    return render_template('reel_view.html', one_reel = one_reel, all_files = all_files)

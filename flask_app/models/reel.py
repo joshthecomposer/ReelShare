@@ -76,7 +76,7 @@ class Reel:
             
             tracklist = file.File.get_tracklist(data)
             for t in tracklist:
-                one_reel.tracks.append(t['path'])
+                one_reel.tracks.append(t)
             one_user.reels.append(one_reel)
         
         return one_user

@@ -246,3 +246,12 @@ input::file-selector-button {
     margin: 3rem 0 3rem 0;
     border-radius: 5px;
 }
+
+li {
+    list-style-type: none;
+}
+
+
+.dragging {
+    opacity: .5;
+}
