@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom/style.css') }}">
+    <title>Login | SoundFlask.io</title>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>SoundFlask.io</h1>
+            <a href="/view/login">LOGIN</a>
+            <a href="/view/register">
+                <button class="button-1" formaction=>SIGN UP</button>
+            </a>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div id="reg" class="hero p-5">
+                <h2 class="form-h2">LOGIN</h2>
+                <hr>
+                {%if session['form_tried'] == 'register'%}
+                    {%with messages = get_flashed_messages()%}
+                        {%if messages%}
+                            {%for message in messages%}
+                                <p class="text-danger">{{message}}</p>
+                            {%endfor%}
+                        {%endif%}
+                    {%endwith%}
+                {%endif%}
+                <div class="form-group">
+                    <form action="/login" method="POST">
+                        <label for="email" type="text" name="email">Email:</label>
+                        <input class="form-control" type="text" name="email">
+                        <label for="password">Password:</label>
+                        <input class="form-control" type="password" name="password">
+                        <button type="submit" class="button-3">Login</button>
+                    </form>
+                </div>
+                <!-- <img src="https://via.placeholder.com/640x360.png?text=DEMO+VIDEO+HERE+OR+IMG+HERE" alt=""> -->
+
+                <div class="hero-description">
+                    <p class="form-subtext">
+                        Need to create an account? <a href="/view/register">Sign up</a> here.
+                    </p>
+                </div>
+                <!-- <button class="button-2">TRY IT OUT NOW</button> -->
+            </div>
+        </div>
+    </main>
+</body>
+</html>

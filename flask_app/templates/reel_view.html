@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="{{ url_for('static', filename='script/script.js') }}" defer></script>
+    <title>{{session['username']}} Reel View</title>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>SoundFlask.io</h1>
+            <p>{{session['username']}}</p>
+            <a href="/dashboard"><p>DASHBOARD</p></a>
+            <a href="/clear">LOGOUT</a>
+        </div>
+    </nav>
+    <main>
+        <!-- <div class="container">
+            <h1>Create a new Reel</h1>
+            <form action="/create_reel" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" name="name">
+                <input type=submit value='Submit'>
+            </form>
+
+        </div> -->
+        <div class="container">
+            <div class="d-container">
+                    <div class="column">
+                            <h2>{{one_reel.name}} OVERVIEW</h2>
+                            <ul class="sortable" style="min-width:400px; min-height: 2000px;">
+                                {%for t in one_reel.tracks%}
+                                    <li id="{{t.id}}" class="audio-box">
+                                        <p class="reel-name">{{t.title}}</p>
+                                        <audio controls src="{{ url_for('static', filename=t.path) }}"></audio>
+                                    </li>
+                                {%endfor%}
+                            </ul>
+                    </div>
+                    <!-- <div class="column">
+                        <h2>DRAG AUDIO INTO YOUR REEL</h2>
+                        <ul class="sortable" id="audio-list" style="min-width:400px; min-height: 2000px;">
+                            {%for f in all_files%}
+                            <li class="audio-box draggable">
+                                    <p>{{f.title}}</p>
+                                    <audio controls src="{{ url_for('static', filename=f.path) }}"></audio>
+                            </li>
+                            {%endfor%}
+                        </ul> -->
+                        <!-- <div class="d-container">
+                            <div class="form-group">
+                                <h2>UPLOAD AUDIO</h2>
+                                <form method=post enctype=multipart/form-data>
+                                    <input class="d-form-control" type="text" name="title" placeholder="TITLE">
+                                    <input class="d-form-control" type=file name=file>
+                                    <div>
+                                        <button type="submit" class="button-3">Upload</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> -->
+                        
+                    <!-- </div>
+            </div>
+        </div> -->
+    
+        <!-- <h1>Add Track to reel:</h1>
+        <form action="/save_track_to_reel" method="POST">
+            <label for="title">Track Title:</label>
+            <input type="text" name="title">
+            <label for="name">Reel Name:</label>
+            <input type="text" name="name">
+            <input type=submit value='Submit'>
+        </form> -->
+    </main>
+    </div>
+</body>
+</html>

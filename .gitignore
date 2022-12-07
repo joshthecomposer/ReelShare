@@ -3,6 +3,8 @@
 
 ### Custom Ignore ###
 /soundflaskio_schema.mwb
+/soundflaskio_schema.mwb.bak
+flask_app/static/users/terminatormunky/
 
 ### Flask ###
 instance/*
