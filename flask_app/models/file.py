@@ -30,7 +30,7 @@ class File:
 
     @classmethod
     def get_all_files(cls, data):
-        query = "SELECT * FROM files WHERE user_id = %(user_id)s"
+        query = "SELECT * FROM files WHERE user_id = %(user_id)s ORDER BY _order ASC"
         result = connectToMySQL(DB).query_db(query, data)
         return result
 
@@ -40,8 +40,8 @@ class File:
             filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
             
     @classmethod
-    def get_file_by_title(cls, data):
-        query = "SELECT files.id FROM files WHERE files.user_id = %(user_id)s AND title = %(title)s"
+    def get_file_by_id(cls, data):
+        query = "SELECT files.id FROM files WHERE files.user_id = %(user_id)s AND files.id = %(id)s"
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
@@ -58,8 +58,9 @@ class File:
         
         
         #TODO: Move audio file validation to here.
-        
-        
-        
-        
         return is_valid
+    
+    @classmethod
+    def update_order(cls, data):
+        query = "UPDATE files SET _order = %(_order)s WHERE id = %(id)s"
+        return connectToMySQL(DB).query_db(query, data)

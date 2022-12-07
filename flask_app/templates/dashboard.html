@@ -35,7 +35,7 @@
                             <h2>YOUR REELS</h2>
                                     {%for r in all_reels%}
                                         <a class="reel-a" href="/reel/view/{{r.id}}">
-                                            <div class="reel-box droppable">
+                                            <div id="{{r.id}}" class="reel-box droppable">
                                                 <p class="reel-name">{{r.name}}</p>
                                                 {%for t in r.tracks%}
                                                 <div class="tiny-container">
@@ -59,7 +59,7 @@
                         <h2>YOUR TRACKS</h2>
                         <ul class="sortable">
                         {%for f in all_files%}
-                        <li class="draggable">
+                        <li id="{{f.id}}" class="draggable">
                             <div class="audio-box">
                                 <p>{{f.title}}</p>
                                 <audio controls src="{{ url_for('static', filename=f.path) }}"></audio>

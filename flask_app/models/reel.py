@@ -29,8 +29,8 @@ class Reel:
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
-    def get_reel_by_name(cls, data):
-        query = "SELECT reels.id FROM reels WHERE reels.name = %(name)s"
+    def get_reel_by_id(cls, data):
+        query = "SELECT reels.id FROM reels WHERE reels.id = %(reel_id)s"
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod

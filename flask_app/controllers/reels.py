@@ -19,14 +19,17 @@ def reel_creation_page():
 
 @app.route("/save_track_to_reel", methods=['POST'])
 def save_track_to_reel():
+    
+    print(request.form['target_id'])
+    
     data = {
         'user_id' : session['user_id'],
-        'title' : request.form['title'],
-        'name' : request.form['name']
+        'id' : request.form['origin_id'],
+        'reel_id' : request.form['target_id']
     }
     
-    file_id = file.File.get_file_by_title(data)[0]['id']
-    reel_id = reel.Reel.get_reel_by_name(data)[0]['id']
+    file_id = file.File.get_file_by_id(data)[0]['id']
+    reel_id = reel.Reel.get_reel_by_id(data)[0]['id']
     
     print(file_id)
     print(reel_id)
