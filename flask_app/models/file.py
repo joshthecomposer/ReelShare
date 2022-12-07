@@ -30,7 +30,7 @@ class File:
 
     @classmethod
     def get_all_files(cls, data):
-        query = "SELECT * FROM files WHERE user_id = %(user_id)s ORDER BY _order ASC"
+        query = "SELECT * FROM files WHERE user_id = %(user_id)s"
         result = connectToMySQL(DB).query_db(query, data)
         return result
 
@@ -49,7 +49,8 @@ class File:
         query = """SELECT * FROM files 
                     JOIN reel_list ON files.id = reel_list.file_id 
                     JOIN reels ON reels.id = reel_list.reel_id 
-                    WHERE reels.name = %(name)s"""
+                    WHERE reels.name = %(name)s 
+                    ORDER BY reel_list._order;"""
         return connectToMySQL(DB).query_db(query, data)
     
     @staticmethod
@@ -62,5 +63,5 @@ class File:
     
     @classmethod
     def update_order(cls, data):
-        query = "UPDATE files SET _order = %(_order)s WHERE id = %(id)s"
+        query = "UPDATE reel_list SET _order = %(_order)s WHERE file_id = %(id)s AND reel_id = %(reel_id)s;"
         return connectToMySQL(DB).query_db(query, data)

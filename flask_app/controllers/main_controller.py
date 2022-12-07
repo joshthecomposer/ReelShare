@@ -16,7 +16,6 @@ def dashboard():
     if 'username' not in session:
         return redirect('/')
     app.config['UPLOAD_FOLDER'] = f'flask_app/static/users/{session["username"]}'
-    print(app.config['UPLOAD_FOLDER'])
     if request.method == 'POST':
         if request.form['title'] == '':
             flash('Please enter a title')
@@ -27,16 +26,13 @@ def dashboard():
         file = request.files['file']
         if file.filename == '':
             flash('Please select an audio file')
-            print(request.url)
             return redirect(request.url)
         if not File.allowed_file(file.filename):
             flash('File not alloweded')
             return redirect(request.url)
         if file and File.allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            print ("filename uploaded is:", filename)
             filename = str(session['user_id']) + "_" +  str(uuid.uuid4()) + "_" + filename
-            print("sanitized filename is :", filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             data = {
                 'user_id' : session['user_id'],
@@ -56,8 +52,8 @@ def dashboard():
         return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
     
     all_reels = all_reels.reels
-    for r in all_reels:
-        print(f"reel: {r.name} tracks: {r.tracks}")
+    # for r in all_reels:
+    #     print(f"reel: {r.name} tracks: {r.tracks}")
 
     return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
 

@@ -20,7 +20,14 @@ class Reel:
     
     @classmethod
     def save_track_to_reel(cls, data):
-        query = "INSERT INTO reel_list (file_id, reel_id) VALUES (%(file_id)s, %(reel_id)s)"
+        query = "SELECT MAX(_order) AS _order FROM reel_list WHERE reel_id = %(reel_id)s;"
+        result = connectToMySQL(DB).query_db(query, data)[0]['_order']
+        data['_order'] = result        
+        if data['_order'] == None:
+            data['_order'] = 10
+        else: 
+            data['_order'] += 10
+        query = "INSERT INTO reel_list (file_id, reel_id, _order) VALUES (%(file_id)s, %(reel_id)s, %(_order)s)"
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
@@ -30,7 +37,7 @@ class Reel:
     
     @classmethod
     def get_reel_by_id(cls, data):
-        query = "SELECT reels.id FROM reels WHERE reels.id = %(reel_id)s"
+        query = "SELECT reels.id FROM reels WHERE reels.id = %(reel_id)s;"
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
@@ -47,7 +54,7 @@ class Reel:
                     WHERE reels.user_id = %(user_id)s
                     GROUP BY reels.id;"""
         result2 = connectToMySQL(DB).query_db(query2, data)
-        
+
         data = {
                 'id' : result[0]['users.id'],
                 'username' : result[0]['username'],
@@ -86,7 +93,6 @@ class Reel:
         is_valid = True
         query = "SELECT * FROM reel_list WHERE file_id = %()s AND reel_id = %()s"
         result = connectToMySQL(DB).query_db(query, data)
-        print("Result of reel validate is:",result)
         if result != False:
             is_valid = False
         return is_valid

@@ -20,8 +20,6 @@ def reel_creation_page():
 @app.route("/save_track_to_reel", methods=['POST'])
 def save_track_to_reel():
     
-    print(request.form['target_id'])
-    
     data = {
         'user_id' : session['user_id'],
         'id' : request.form['origin_id'],
@@ -30,9 +28,6 @@ def save_track_to_reel():
     
     file_id = file.File.get_file_by_id(data)[0]['id']
     reel_id = reel.Reel.get_reel_by_id(data)[0]['id']
-    
-    print(file_id)
-    print(reel_id)
     
     data = {
         'file_id' : file_id,
@@ -51,6 +46,5 @@ def reeL_view(id):
     for r in one_user.reels:
         if r.id == id:
             one_reel = r
-    all_files = file.File.get_all_files(data)
-    print("one_reel trax ==: ", one_reel.tracks)
-    return render_template('reel_view.html', one_reel = one_reel, all_files = all_files)
+    session['reel_id'] = one_reel.id
+    return render_template('reel_view.html', one_reel = one_reel)

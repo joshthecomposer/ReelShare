@@ -35,7 +35,7 @@
                             <h2>{{one_reel.name}} OVERVIEW</h2>
                             <ul class="sortable" style="min-width:400px; min-height: 2000px;">
                                 {%for t in one_reel.tracks%}
-                                    <li id="{{t.id}}" class="audio-box draggable">
+                                    <li id="{{t.id}}" class="audio-box">
                                         <p class="reel-name">{{t.title}}</p>
                                         <audio controls src="{{ url_for('static', filename=t.path) }}"></audio>
                                     </li>

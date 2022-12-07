@@ -7,14 +7,13 @@ from flask_app.models import file
 def tracklist_update():
     if request.method == 'POST':
         getorder = request.form['order']
-        print(request.form['order'])
     getorder = getorder.split(',')
-    print(getorder)
     o = 10
     for i in getorder:
         data = {
             "id" : i,
-            "_order" : o
+            "_order" : o,
+            "reel_id" : session['reel_id']
         }
         file.File.update_order(data)
         o += 10
