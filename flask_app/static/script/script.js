@@ -25,8 +25,10 @@ $(document).ready(function () {
         $( ".droppable" ).droppable({
             drop: function (event, ui) {
                 console.log(event)
-                console.log(ui.draggable[0])
-                // $(event.target).append("<p>test</p>")
+                console.log(ui.draggable[0].innerHTML)
+                $(event.target).append(
+                    `${ui.draggable[0].innerHTML}`
+                )
                 $.ajax({
                     method: "POST",
                     url: "/save_track_to_reel",

@@ -53,7 +53,9 @@ nav {
     justify-content: center;
     gap: 1.5rem;
     margin: 1rem 5rem 0 5rem;
-    background-color:rgb(59, 53, 87)
+    background-color:rgb(59, 53, 87);
+    width: 300px;
+    height: 1.5rem;
 }
 
 .column {
@@ -267,9 +269,10 @@ li {
 .tiny-track {
     font-size: 1.1rem;
     background-color: #666270;
+    width: 10rem;
 }
 
 .tiny-audio-box {
-    width: 20rem;
+    width: 200px;
     height: 1.5rem;
 }
