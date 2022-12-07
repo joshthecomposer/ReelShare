@@ -4,7 +4,7 @@
 ### Custom Ignore ###
 /soundflaskio_schema.mwb
 /soundflaskio_schema.mwb.bak
-terminatormunky/
+flask_app/static/users/terminatormunky/
 
 ### Flask ###
 instance/*
