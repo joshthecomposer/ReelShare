@@ -10,12 +10,22 @@ class File:
         self.user_id = data['user_id']
         self.title = data['title']
         self.path = data['path']
+        self.order = data['order']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
 
     @classmethod
     def save(cls, data):
-        query = "INSERT INTO files (user_id, title, path) VALUES (%(user_id)s , %(title)s ,  %(path)s)"
+        query = "SELECT MAX(_order) AS _order FROM files WHERE user_id = %(user_id)s;"
+        result = connectToMySQL(DB).query_db(query, data)[0]['_order']
+        data['_order'] = result
+        print(data)
+        if data['_order'] == None:
+            data['_order'] = 10
+        else: 
+            data['_order'] += 10
+        query = """INSERT INTO files (user_id, title, path, _order)
+                    VALUES (%(user_id)s , %(title)s,  %(path)s, %(_order)s)"""
         return connectToMySQL(DB).query_db(query, data)
 
     @classmethod
@@ -41,3 +51,15 @@ class File:
                     JOIN reels ON reels.id = reel_list.reel_id 
                     WHERE reels.name = %(name)s"""
         return connectToMySQL(DB).query_db(query, data)
+    
+    @staticmethod
+    def validate(data):
+        is_valid = True
+        
+        
+        #TODO: Move audio file validation to here.
+        
+        
+        
+        
+        return is_valid

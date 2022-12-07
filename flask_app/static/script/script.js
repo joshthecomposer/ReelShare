@@ -1,5 +1,7 @@
-$(document).ready( function() {
-    $( "ul.sortable" ).sortable({
+
+
+$(document).ready(function () {
+    $("ul.sortable").sortable({
         update: function(event, ui) {
             updateOrder();
         }
@@ -8,11 +10,12 @@ $(document).ready( function() {
         connectToSortable: ".sortable",
         revert: "invalid"
     });
-    $( "ul, li" ).disableSelection();
+    $("ul, li").disableSelection();
 } );
 function updateOrder() {
     var item_order = new Array();
     $('ul.sortable li').each(function(){
         item_order.push($(this).attr("id"));
+        console.log("Item order is: ", item_order);
     })
 }

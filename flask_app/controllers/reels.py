@@ -8,7 +8,9 @@ def create_reel():
         "user_id" : session['user_id'],
         "name" : request.form['name']
     }
-    reel.Reel.save(data)
+    is_valid = reel.Reel.validate(data)
+    if is_valid:
+        reel.Reel.save(data)
     return redirect('/dashboard')
 
 @app.route('/reel/create')

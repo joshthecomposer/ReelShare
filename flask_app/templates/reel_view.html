@@ -14,8 +14,8 @@
     <nav>
         <div class="container">
             <h1>SoundFlask.io</h1>
-            <p>{{session['username']}}'s</p>
-            <p>DASHBOARD</p>
+            <p>{{session['username']}}</p>
+            <a href="/dashboard"><p>DASHBOARD</p></a>
             <a href="/clear">LOGOUT</a>
         </div>
     </nav>
@@ -33,7 +33,7 @@
             <div class="d-container">
                     <div class="column">
                             <h2>{{one_reel.name}} OVERVIEW</h2>
-                            <ul class="sortable" style="min-width:400px; min-height: 400px;">
+                            <ul class="sortable" style="min-width:400px; min-height: 2000px;">
                                 {%for t in one_reel.tracks%}
                                     <li id="{{t.id}}" class="audio-box draggable">
                                         <p class="reel-name">{{t.title}}</p>
@@ -42,16 +42,16 @@
                                 {%endfor%}
                             </ul>
                     </div>
-                    <div class="column">
+                    <!-- <div class="column">
                         <h2>DRAG AUDIO INTO YOUR REEL</h2>
-                        <ul class="sortable" id="audio-list" style="min-width:400px; min-height: 400px;">
+                        <ul class="sortable" id="audio-list" style="min-width:400px; min-height: 2000px;">
                             {%for f in all_files%}
                             <li class="audio-box draggable">
                                     <p>{{f.title}}</p>
                                     <audio controls src="{{ url_for('static', filename=f.path) }}"></audio>
                             </li>
                             {%endfor%}
-                        </ul>
+                        </ul> -->
                         <!-- <div class="d-container">
                             <div class="form-group">
                                 <h2>UPLOAD AUDIO</h2>
@@ -65,9 +65,9 @@
                             </div>
                         </div> -->
                         
-                    </div>
+                    <!-- </div>
             </div>
-        </div>
+        </div> -->
     
         <!-- <h1>Add Track to reel:</h1>
         <form action="/save_track_to_reel" method="POST">

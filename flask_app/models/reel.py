@@ -80,3 +80,13 @@ class Reel:
             one_user.reels.append(one_reel)
         
         return one_user
+    
+    @classmethod
+    def validate(cls, data):
+        is_valid = True
+        query = "SELECT * FROM reel_list WHERE file_id = %()s AND reel_id = %()s"
+        result = connectToMySQL(DB).query_db(query, data)
+        print("Result of reel validate is:",result)
+        if result != False:
+            is_valid = False
+        return is_valid

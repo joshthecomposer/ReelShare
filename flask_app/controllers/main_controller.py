@@ -7,8 +7,8 @@ from werkzeug.utils import secure_filename
 
 @app.route('/')
 def index():
-    # if 'username' in session:
-    #     return redirect('/dashboard')
+    if 'username' in session:
+        return redirect('/dashboard')
     return render_template('landing.html')
 
 @app.route('/dashboard', methods=['GET', 'POST'])
