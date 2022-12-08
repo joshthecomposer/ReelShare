@@ -14,13 +14,13 @@ $(document).ready(function () {
                 data: item_order,
                 cache: false,
                 success: function (data) {
-                    $("#test").html(data);
+                    return false;
                 }
             })
         }
     })
     $(document).ajaxSuccess(function () {
-        setInterval('location.reload()', 1000);
+        window.location.reload();
     });
 });
 
@@ -46,7 +46,7 @@ $(document).ready(function () {
                     cache: false,
                     success: function (data) {
                         $("#test").html(data);
-                        window.location.reload();
+                        return false;
                     }
                 })
                 }
@@ -80,10 +80,10 @@ async function revealReelCreation() {
             url: "/reveal_reel_creation_box",
             cache: false,
             success: function (data) {
-                window.location.reload();
+                return false;
             }
         })
-        return false;
+        
 }
 
 async function hideReelCreation() {
@@ -116,8 +116,7 @@ async function hideReelCreation() {
             url: "/reveal_reel_creation_box",
             cache: false,
             success: function (data) {
-                window.location.reload();
+                return false;
             }
         })
-        return false;
 }

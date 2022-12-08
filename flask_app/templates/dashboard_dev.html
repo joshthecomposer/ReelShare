@@ -49,9 +49,9 @@
                                             <ul id="{{r.id}}" class="reel-box droppable">
                                                 <p class="reel-name">{{r.name}}</p>
                                                     {%for t in r.tracks%}
-                                                    <li class="tiny-container">
-                                                            <p class="tiny-track">{{t.title}}</p>
-                                                                <audio class="tiny-audio-box" src="{{ url_for('static', filename=t.path) }}" controlsList="noplaybackrate nodownload"><audio>
+                                                    <li class="track-container">
+                                                        <p class="track">{{t.title}}</p>
+                                                            <audio src="{{ url_for('static', filename=t.path) }}" controlsList="noplaybackrate nodownload"><audio>
                                                     </li>
                                                     {%endfor%}
                                                 </ul>
@@ -110,10 +110,10 @@
                             <h2>YOUR TRACKS</h2>
                             <ul>
                             {%for f in all_files%}
-                            <li id="{{f.id}}" class="tiny-container draggable">
-                                        <p class="tiny-track">{{f.title}}</p>
-                                        <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=f.path) }}" controlsList="noplaybackrate nodownload"></audio>
-                            </li>
+                                <li id="{{f.id}}" class="track-container draggable">
+                                        <p class="track-title">{{f.title}}</p>
+                                        <audio class="track" src="{{ url_for('static', filename=f.path) }}"></audio>
+                                </li>
                             {%endfor%}
                             </ul>
                             <div class="d-container">

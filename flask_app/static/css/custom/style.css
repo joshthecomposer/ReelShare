@@ -367,3 +367,23 @@ audio::-webkit-media-controls-play-button {
     font-weight: 700;
     font-size: 1.4rem;
 }
+
+.track-container {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-collapse: collapse;
+    margin-top: -1px;
+    height: 3.5rem;
+}
+
+.is-playing {
+    background-color:rgba(97, 97, 97, .5)
+}
+
+.track-container:hover {
+    background-color:rgba(97, 97, 97, .5);
+    cursor: default;
+}
