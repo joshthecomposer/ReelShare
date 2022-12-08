@@ -65,7 +65,7 @@
                             {%for f in all_files%}
                             <li id="{{f.id}}" class="tiny-container draggable">
                                         <p class="tiny-track">{{f.title}}</p>
-                                        <audio class="tiny-audio-box" src="{{ url_for('static', filename=f.path) }}" controlsList="noplaybackrate nodownload"></audio>
+                                        <audio class="tiny-audio-box" src="{{ url_for('static', filename=f.path) }}" controlsList="noplaybackrate nodownload">
                             </li>
                             {%endfor%}
                             </ul>
@@ -93,15 +93,18 @@
                                 <h2>YOUR REELS</h2>
                                         {%for r in all_reels%}
                                             <a class="reel-a" href="/reel/view/{{r.id}}">
-                                            <ul id="{{r.id}}" class="reel-box droppable">
+                                            <div class="reel-box">
                                                 <p class="reel-name">{{r.name}}</p>
-                                                    {%for t in r.tracks%}
-                                                    <li class="tiny-container">
-                                                            <p class="tiny-track">{{t.title}}</p>
-                                                                <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=t.path) }}" controlsList="noplaybackrate nodownload"><audio>
-                                                    </li>
-                                                    {%endfor%}
-                                                </ul>
+                                                    <ul id="{{r.id}}" class="droppable">
+                                                        {%for t in r.tracks%}
+                                                        <li class="track-container">
+                                                            <button id="play-icon"></button>
+                                                            <p class="track-title">{{t.title}}</p>
+                                                            <audio class="track" src="{{ url_for('static', filename=t.path) }}">
+                                                        </li>
+                                                        {%endfor%}
+                                                    </ul>
+                                                </div>
                                             </a>
                                         {%endfor%}
                             <button id="revealReelCreationButton" class="button-3" onclick="revealReelCreation()">CREATE A NEW REEL</button>
@@ -111,8 +114,9 @@
                             <ul>
                             {%for f in all_files%}
                                 <li id="{{f.id}}" class="track-container draggable">
+                                        <button id="play-icon"></button>
                                         <p class="track-title">{{f.title}}</p>
-                                        <audio class="track" src="{{ url_for('static', filename=f.path) }}"></audio>
+                                        <audio class="track" src="{{ url_for('static', filename=f.path) }}">
                                 </li>
                             {%endfor%}
                             </ul>

@@ -18,7 +18,7 @@ body {
     font-size: 1.6rem;
     font-family: Lato;
     background: linear-gradient(73deg, rgba(19,17,28,1) 0%, rgba(51,18,42,1) 100%);
-    background-size: cover;
+    /* background-size: cover; */
 }
 
 #reel_creation {
@@ -260,7 +260,7 @@ form {
 }
 
 .reel-a .reel-box:hover {
-    background-color: rgba(59, 53, 87, 0.8);
+    background-color: rgba(41, 41, 41, .5);
 }
 
 input::file-selector-button {
@@ -283,6 +283,10 @@ input::file-selector-button {
     background-color: rgb(19,17,28);
     margin: 3rem 0 3rem 0;
     border-radius: 5px;
+}
+
+ul {
+    margin-top: 3rem;
 }
 
 li {
@@ -386,4 +390,13 @@ audio::-webkit-media-controls-play-button {
 .track-container:hover {
     background-color:rgba(97, 97, 97, .5);
     cursor: default;
+}
+
+#play-icon {
+    background-image: url('/static/img/play.png');
+    height: 1.6rem;
+    width: 1.6rem;
+    background-size: cover;
+    background-color: transparent;
+    margin-right: 3rem;
 }
