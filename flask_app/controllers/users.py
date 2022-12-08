@@ -25,6 +25,7 @@ def register():
         }
 
         user_id = user.User.save(data)
+        print('=============SAVED USER ID IS=====', user_id)
         session['user_id'] = user_id
         session['username'] = data['username']
         return redirect('/dashboard')

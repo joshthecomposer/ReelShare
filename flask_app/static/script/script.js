@@ -3,7 +3,7 @@ let hideElement = document.getElementById('reel_creation');
 
 $(document).ready(function () {
     $("ul.sortable").sortable({
-        update: function(event, ui) {
+        update: function (event, ui) {
             item_order = updateOrder();
             console.log("Item order is: ", item_order);
             order_string = 'order=' + item_order;
@@ -18,7 +18,11 @@ $(document).ready(function () {
                 }
             })
         }
+    })
+    $(document).ajaxSuccess(function () {
+        setInterval('location.reload()', 1000);
     });
+});
 
     $( function() {
         $(".draggable").draggable({
@@ -42,12 +46,12 @@ $(document).ready(function () {
                     cache: false,
                     success: function (data) {
                         $("#test").html(data);
+                        window.location.reload();
                     }
                 })
                 }
         });
     });
-});
 
 function updateOrder() {
     var item_order = new Array();
@@ -76,6 +80,7 @@ async function revealReelCreation() {
             url: "/reveal_reel_creation_box",
             cache: false,
             success: function (data) {
+                window.location.reload();
             }
         })
         return false;
@@ -105,18 +110,14 @@ async function hideReelCreation() {
             '-webkit-transition':'all 0.5s ease-out',
             '-moz-transition':'all 0.5s ease-out',
             '-o-transition':'all 0.5s ease-out'
-        }); 
+        });
         $.ajax({
             method: "POST",
             url: "/reveal_reel_creation_box",
             cache: false,
             success: function (data) {
+                window.location.reload();
             }
         })
         return false;
 }
-
-
-$(document).ajaxSuccess(function () {
-    window.location.reload();
-});

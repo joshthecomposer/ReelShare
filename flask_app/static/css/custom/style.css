@@ -64,10 +64,10 @@ nav {
     align-items: center;
     justify-content: center;
     gap: 1.5rem;
-    margin: 1rem 5rem 0 5rem;
+    margin: 2px 5rem 0 5rem;
     background-color:rgb(59, 53, 87);
     width: 300px;
-    height: 1.5rem;
+    height: 2rem;
 }
 
 .column {
@@ -136,6 +136,21 @@ nav h1 {
 
 .button-3:hover {
     background-color: #5130ac;
+    cursor: pointer;
+}
+
+.button-4 {
+    background-color: #666270;
+    color: white;
+    /* border: 2px solid white; */
+    padding: 1rem 2rem;
+    font-family: Lato;
+    border-radius: 5px;
+    margin-top: 1.5rem;
+}
+
+.button-4:hover {
+    background-color: #767579;
     cursor: pointer;
 }
 
@@ -276,12 +291,12 @@ li {
 
 .tiny-track {
     font-size: 1.2rem;
-    background-color: #666270;
+    /* background-color: #666270; */
     width: 10rem;
 }
 
 .tiny-audio-box {
-    width: 200px;
+    width: 150px;
     height: 1.5rem;
     margin: 0 auto;
 }
@@ -294,4 +309,61 @@ li {
 
 #blurry {
     filter: blur(30px);
+}
+
+
+/* audio controls */
+
+
+/* audio::-webkit-media-controls-panel
+audio::-webkit-media-controls-mute-button
+audio::-webkit-media-controls-play-button
+audio::-webkit-media-controls-timeline-container
+audio::-webkit-media-controls-current-time-display
+audio::-webkit-media-controls-time-remaining-display
+audio::-webkit-media-controls-timeline
+audio::-webkit-media-controls-volume-slider-container
+audio::-webkit-media-controls-volume-slider
+audio::-webkit-media-controls-seek-back-button
+audio::-webkit-media-controls-seek-forward-button
+audio::-webkit-media-controls-fullscreen-button
+audio::-webkit-media-controls-rewind-button
+audio::-webkit-media-controls-return-to-realtime-button
+audio::-webkit-media-controls-toggle-closed-captions-button */
+
+audio::-webkit-media-controls-panel {
+    background-color: rgb(59, 53, 87);
+}
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display {
+    display: none;
+}
+
+
+audio::-webkit-media-controls-mute-button,
+audio::-webkit-media-controls-play-button {
+    opacity: 1;
+}
+
+
+
+
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+.custom-file-input {
+    display: inline-block;
+    justify-content: center;
+}
+.custom-file-input::before {
+    content: 'BROWSE';
+    background: #666270;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
+    white-space: nowrap;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.4rem;
 }

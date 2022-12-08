@@ -32,7 +32,7 @@
                             <input class="form-control" type="text" name="name">
                                 <button type="submit" class="button-3">CREATE</button>
                             <div>
-                                <button id="revealReelCreationButton" class="button-3" onclick="hideReelCreation()">BACK</button>
+                                <button id="revealReelCreationButton" class="button-4" onclick="hideReelCreation()">BACK</button>
                             </div>
                         </form>
                     </div>
@@ -51,7 +51,7 @@
                                                     {%for t in r.tracks%}
                                                     <li class="tiny-container">
                                                             <p class="tiny-track">{{t.title}}</p>
-                                                                <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=t.path) }}"><audio>
+                                                                <audio class="tiny-audio-box" src="{{ url_for('static', filename=t.path) }}" controlsList="noplaybackrate nodownload"><audio>
                                                     </li>
                                                     {%endfor%}
                                                 </ul>
@@ -65,7 +65,7 @@
                             {%for f in all_files%}
                             <li id="{{f.id}}" class="tiny-container draggable">
                                         <p class="tiny-track">{{f.title}}</p>
-                                        <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=f.path) }}"></audio>
+                                        <audio class="tiny-audio-box" src="{{ url_for('static', filename=f.path) }}" controlsList="noplaybackrate nodownload"></audio>
                             </li>
                             {%endfor%}
                             </ul>
@@ -87,7 +87,7 @@
                                                     {%for t in r.tracks%}
                                                     <li class="tiny-container">
                                                             <p class="tiny-track">{{t.title}}</p>
-                                                                <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=t.path) }}"><audio>
+                                                                <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=t.path) }}" controlsList="noplaybackrate nodownload"><audio>
                                                     </li>
                                                     {%endfor%}
                                                 </ul>
@@ -101,16 +101,16 @@
                             {%for f in all_files%}
                             <li id="{{f.id}}" class="tiny-container draggable">
                                         <p class="tiny-track">{{f.title}}</p>
-                                        <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=f.path) }}"></audio>
+                                        <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=f.path) }}" controlsList="noplaybackrate nodownload"></audio>
                             </li>
                             {%endfor%}
                             </ul>
                             <div class="d-container">
-                                <div class="form-group">
+                                <div class="form-group upload">
                                     <h2>UPLOAD AUDIO</h2>
                                     <form method=post enctype=multipart/form-data>
                                         <input class="d-form-control" type="text" name="title" placeholder="TITLE">
-                                        <input class="d-form-control" type=file name=file>
+                                        <input class="custom-file-input" type=file name=file>
                                         <div>
                                             <button type="submit" class="button-3">UPLOAD</button>
                                         </div>
