@@ -21,6 +21,17 @@ body {
     background-size: cover;
 }
 
+#reel_creation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    margin: auto;
+    background-color: rgba(19,17,28,1);
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+}
+
 nav {
     background-color: rgba(19,17,28,1);
     color: white;
@@ -28,6 +39,7 @@ nav {
     position: fixed;
     width: 100%;
     top: 0;
+    z-index: 1;
 }
 
 .container {
@@ -130,6 +142,8 @@ nav h1 {
 
 main {
     margin-top: 78px;
+    z-index: 0;
+    position: relative;
 }
 
 .hero {
@@ -260,11 +274,6 @@ li {
     list-style-type: none;
 }
 
-
-.dragging {
-    opacity: .5;
-}
-
 .tiny-track {
     font-size: 1.1rem;
     background-color: #666270;
@@ -275,4 +284,14 @@ li {
     width: 200px;
     height: 1.5rem;
     margin: 0 auto;
+}
+
+.spacer {
+    margin-bottom: -200px;
+    height: 200px;
+    z-index: 9999;
+}
+
+#blurry {
+    filter: blur(30px);
 }

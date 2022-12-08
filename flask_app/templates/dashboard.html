@@ -20,65 +20,109 @@
         </div>
     </nav>
     <main>
-        <!-- <div class="container">
-            <h1>Create a new Reel</h1>
-            <form action="/create_reel" method="POST">
-                <label for="name">Name:</label>
-                <input type="text" name="name">
-                <input type=submit value='Submit'>
-            </form>
 
-        </div> -->
-        <div class="container">
-            <div class="d-container">
-                    <div class="column">
-                            <h2>YOUR REELS</h2>
-                                    {%for r in all_reels%}
-                                        <a class="reel-a" href="/reel/view/{{r.id}}">
-                                        <ul id="{{r.id}}" class="reel-box droppable">
-                                            <p class="reel-name">{{r.name}}</p>
-                                                {%for t in r.tracks%}
-                                                <li class="tiny-container">
-                                                        <p class="tiny-track">{{t.title}}</p>
-                                                            <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=t.path) }}"><audio>
-                                                </li>
-                                                {%endfor%}
-                                            </ul>
-                                        </a>
-                                    {%endfor%}
-                            <!-- <div class="reel-box">
-                                <p class="reel-name">Reel Name</p>
-                            </div> -->
-                            <a href="/reel/create">
-                                <button class="button-3">CREATE A REEL</button>
-                            </a>
-                    </div>
-                    <div class="column">
-                        <h2>YOUR TRACKS</h2>
-                        <ul>
-                        {%for f in all_files%}
-                        <li id="{{f.id}}" class="tiny-container draggable">
-                                    <p class="tiny-track">{{f.title}}</p>
-                                    <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=f.path) }}"></audio>
-                        </li>
-                        {%endfor%}
-                        </ul>
-                        
+    {%if session['reel_creation'] == true%}
+        <div  id="reel_creation" class="container">
+            <div class="container">
+                <div id="reg" class="hero p-5">
+                    <h2 class="form-h2">REEL CREATION</h2>
+                    <div class="form-group">
+                        <form action="/create_reel" method="POST">
+                            <label for="name" type="text" name="email">NAME:</label>
+                            <input class="form-control" type="text" name="name">
+                                <button type="submit" class="button-3">CREATE</button>
+                            <div>
+                                <button id="revealReelCreationButton" class="button-3" onclick="hideReelCreation()">BACK</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-            <div class="d-container">
-                <div class="form-group">
-                    <h2>UPLOAD AUDIO</h2>
-                    <form method=post enctype=multipart/form-data>
-                        <input class="d-form-control" type="text" name="title" placeholder="TITLE">
-                        <input class="d-form-control" type=file name=file>
-                        <div>
-                            <button type="submit" class="button-3">Upload</button>
+        </div>
+        <div id="blurry">
+            <div class="container">
+                <div class="d-container">
+                        <div class="column">
+                                <h2>YOUR REELS</h2>
+                                        {%for r in all_reels%}
+                                            <a class="reel-a" href="/reel/view/{{r.id}}">
+                                            <ul id="{{r.id}}" class="reel-box droppable">
+                                                <p class="reel-name">{{r.name}}</p>
+                                                    {%for t in r.tracks%}
+                                                    <li class="tiny-container">
+                                                            <p class="tiny-track">{{t.title}}</p>
+                                                                <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=t.path) }}"><audio>
+                                                    </li>
+                                                    {%endfor%}
+                                                </ul>
+                                            </a>
+                                        {%endfor%}
+                            <button id="revealReelCreationButton" class="button-3">CREATE A NEW REEL</button>
                         </div>
-                    </form>
+                        <div class="column">
+                            <h2>YOUR TRACKS</h2>
+                            <ul>
+                            {%for f in all_files%}
+                            <li id="{{f.id}}" class="tiny-container draggable">
+                                        <p class="tiny-track">{{f.title}}</p>
+                                        <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=f.path) }}"></audio>
+                            </li>
+                            {%endfor%}
+                            </ul>
+                            
+                        </div>
+                    </div>
                 </div>
         </div>
+        {%elif session['reel_creation'] == false or 'reel_creation' not in session %}
+        <div id="not_blurry">
+            <div class="container">
+                <div class="d-container">
+                        <div class="column">
+                                <h2>YOUR REELS</h2>
+                                        {%for r in all_reels%}
+                                            <a class="reel-a" href="/reel/view/{{r.id}}">
+                                            <ul id="{{r.id}}" class="reel-box droppable">
+                                                <p class="reel-name">{{r.name}}</p>
+                                                    {%for t in r.tracks%}
+                                                    <li class="tiny-container">
+                                                            <p class="tiny-track">{{t.title}}</p>
+                                                                <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=t.path) }}"><audio>
+                                                    </li>
+                                                    {%endfor%}
+                                                </ul>
+                                            </a>
+                                        {%endfor%}
+                            <button id="revealReelCreationButton" class="button-3" onclick="revealReelCreation()">CREATE A NEW REEL</button>
+                        </div>
+                        <div class="column">
+                            <h2>YOUR TRACKS</h2>
+                            <ul>
+                            {%for f in all_files%}
+                            <li id="{{f.id}}" class="tiny-container draggable">
+                                        <p class="tiny-track">{{f.title}}</p>
+                                        <audio class="tiny-audio-box" controls src="{{ url_for('static', filename=f.path) }}"></audio>
+                            </li>
+                            {%endfor%}
+                            </ul>
+                            <div class="d-container">
+                                <div class="form-group">
+                                    <h2>UPLOAD AUDIO</h2>
+                                    <form method=post enctype=multipart/form-data>
+                                        <input class="d-form-control" type="text" name="title" placeholder="TITLE">
+                                        <input class="d-form-control" type=file name=file>
+                                        <div>
+                                            <button type="submit" class="button-3">UPLOAD</button>
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
+                            
+                        </div>
+                    </div>
+                </div>
+        </div>
+        {%endif%}
     </main>
 </body>
 </html>

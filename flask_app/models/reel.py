@@ -88,11 +88,14 @@ class Reel:
         
         return one_user
     
-    @classmethod
-    def validate(cls, data):
+    @staticmethod
+    def validate(data):
         is_valid = True
-        query = "SELECT * FROM reel_list WHERE file_id = %()s AND reel_id = %()s"
+        if data['name'] == '':
+            is_valid = False
+        query = "SELECT * FROM reels WHERE name = %(name)s and user_id = %(user_id)s"
         result = connectToMySQL(DB).query_db(query, data)
-        if result != False:
+        print(result)
+        if result:
             is_valid = False
         return is_valid

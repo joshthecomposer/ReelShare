@@ -1,3 +1,6 @@
+let blurElement = document.getElementById('not_blurry');
+let hideElement = document.getElementById('reel_creation');
+
 $(document).ready(function () {
     $("ul.sortable").sortable({
         update: function(event, ui) {
@@ -22,7 +25,7 @@ $(document).ready(function () {
             helper: "clone",
             revert: "invalid"
         });
-        $( ".droppable" ).droppable({
+        $(".droppable").droppable({
             drop: function (event, ui) {
                 console.log(event)
                 console.log(ui.draggable[0])
@@ -53,6 +56,67 @@ function updateOrder() {
     })
     return item_order;
 }
+
+async function revealReelCreation() {
+    var filterVal = 'blur(30px)';
+        $(blurElement).css({
+            'filter':filterVal,
+            'webkitFilter':filterVal,
+            'mozFilter':filterVal,
+            'oFilter':filterVal,
+            'msFilter':filterVal,
+            'transition':'all 0.5s ease-out',
+            '-webkit-transition':'all 0.5s ease-out',
+            '-moz-transition':'all 0.5s ease-out',
+            '-o-transition':'all 0.5s ease-out'
+        }); 
+    
+        $.ajax({
+            method: "POST",
+            url: "/reveal_reel_creation_box",
+            cache: false,
+            success: function (data) {
+            }
+        })
+        return false;
+}
+
+async function hideReelCreation() {
+        var opacity = 'opacity(0)';
+        var filterVal = 'blur(0px)';
+        $(hideElement).css({
+            'filter':opacity,
+            'webkitFilter':opacity,
+            'mozFilter':opacity,
+            'oFilter':opacity,
+            'msFilter':opacity,
+            'transition':'all 0.5s ease-out',
+            '-webkit-transition':'all 0.5s ease-out',
+            '-moz-transition':'all 0.5s ease-out',
+            '-o-transition':'all 0.5s ease-out'
+        });
+        $(blurElement).css({
+            'filter':filterVal,
+            'webkitFilter':filterVal,
+            'mozFilter':filterVal,
+            'oFilter':filterVal,
+            'msFilter':filterVal,
+            'transition':'all 0.5s ease-out',
+            '-webkit-transition':'all 0.5s ease-out',
+            '-moz-transition':'all 0.5s ease-out',
+            '-o-transition':'all 0.5s ease-out'
+        }); 
+        $.ajax({
+            method: "POST",
+            url: "/reveal_reel_creation_box",
+            cache: false,
+            success: function (data) {
+            }
+        })
+        return false;
+}
+
+
 $(document).ajaxSuccess(function () {
     window.location.reload();
 });
