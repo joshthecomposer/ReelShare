@@ -44,6 +44,9 @@ $(document).ready(function () {
                         origin_id : ui.draggable[0].id
                     },
                     cache: false,
+                    beforeSend: function () {
+                        $(event.target).removeAttr('style');
+                    },
                     success: function (data) {
                         $("#test").html(data);
                         location.reload();
@@ -63,22 +66,24 @@ function updateOrder() {
 
 async function revealReelCreation() {
     var filterVal = 'blur(30px)';
-        $(blurElement).css({
-            'filter':filterVal,
-            'webkitFilter':filterVal,
-            'mozFilter':filterVal,
-            'oFilter':filterVal,
-            'msFilter':filterVal,
-            'transition':'all 0.5s ease-out',
-            '-webkit-transition':'all 0.5s ease-out',
-            '-moz-transition':'all 0.5s ease-out',
-            '-o-transition':'all 0.5s ease-out'
-        }); 
     
         $.ajax({
             method: "POST",
             url: "/reveal_reel_creation_box",
             cache: false,
+            beforeSend: function () {
+                $(blurElement).css({
+                    'filter':filterVal,
+                    'webkitFilter':filterVal,
+                    'mozFilter':filterVal,
+                    'oFilter':filterVal,
+                    'msFilter':filterVal,
+                    'transition':'all 0.5s ease-out',
+                    '-webkit-transition':'all 0.5s ease-out',
+                    '-moz-transition':'all 0.5s ease-out',
+                    '-o-transition':'all 0.5s ease-out'
+                }); 
+            },
             success: function (data) {
                 location.reload();
             }
@@ -89,32 +94,34 @@ async function revealReelCreation() {
 async function hideReelCreation() {
         var opacity = 'opacity(0)';
         var filterVal = 'blur(0px)';
-        $(hideElement).css({
-            'filter':opacity,
-            'webkitFilter':opacity,
-            'mozFilter':opacity,
-            'oFilter':opacity,
-            'msFilter':opacity,
-            'transition':'all 0.5s ease-out',
-            '-webkit-transition':'all 0.5s ease-out',
-            '-moz-transition':'all 0.5s ease-out',
-            '-o-transition':'all 0.5s ease-out'
-        });
-        $(blurElement).css({
-            'filter':filterVal,
-            'webkitFilter':filterVal,
-            'mozFilter':filterVal,
-            'oFilter':filterVal,
-            'msFilter':filterVal,
-            'transition':'all 0.5s ease-out',
-            '-webkit-transition':'all 0.5s ease-out',
-            '-moz-transition':'all 0.5s ease-out',
-            '-o-transition':'all 0.5s ease-out'
-        });
         $.ajax({
             method: "POST",
             url: "/reveal_reel_creation_box",
             cache: false,
+            beforeSend: function () {
+                $(hideElement).css({
+                    'filter':opacity,
+                    'webkitFilter':opacity,
+                    'mozFilter':opacity,
+                    'oFilter':opacity,
+                    'msFilter':opacity,
+                    'transition':'all 0.5s ease-out',
+                    '-webkit-transition':'all 0.5s ease-out',
+                    '-moz-transition':'all 0.5s ease-out',
+                    '-o-transition':'all 0.5s ease-out'
+                });
+                $(blurElement).css({
+                    'filter':filterVal,
+                    'webkitFilter':filterVal,
+                    'mozFilter':filterVal,
+                    'oFilter':filterVal,
+                    'msFilter':filterVal,
+                    'transition':'all 0.5s ease-out',
+                    '-webkit-transition':'all 0.5s ease-out',
+                    '-moz-transition':'all 0.5s ease-out',
+                    '-o-transition':'all 0.5s ease-out'
+                });
+            },
             success: function (data) {
                 location.reload();
             }

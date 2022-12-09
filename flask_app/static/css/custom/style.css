@@ -76,6 +76,16 @@ nav {
     align-items: center;
 }
 
+.reels {
+    position: absolute;
+    right: 55%;
+}
+
+.tracks {
+    position: fixed;
+    left: 55%;
+}
+
 nav .container {
     justify-content: end;
 }
@@ -287,6 +297,7 @@ input::file-selector-button {
 
 ul {
     margin-top: 3rem;
+    min-height: 3.5rem;
 }
 
 li {
