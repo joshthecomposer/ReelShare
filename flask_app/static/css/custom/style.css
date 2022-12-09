@@ -400,3 +400,26 @@ audio::-webkit-media-controls-play-button {
     background-color: transparent;
     margin-right: 3rem;
 }
+
+#pause-icon {
+    background-image: url('/static/img/pause.png');
+    height: 1.6rem;
+    width: 1.6rem;
+    background-size: cover;
+    background-color: transparent;
+    margin-right: 3rem;
+}
+
+
+.progBar {
+    background-color: white;
+    height: 2px;
+    width: 0;
+    border-radius: 3px;
+    margin-left: 2rem;
+    width: 0;
+}
+
+.progBarBox {
+    width: 200px;
+}

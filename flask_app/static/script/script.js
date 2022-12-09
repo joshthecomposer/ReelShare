@@ -14,14 +14,14 @@ $(document).ready(function () {
                 data: item_order,
                 cache: false,
                 success: function (data) {
-                    return false;
+                    location.reload();
                 }
             })
         }
     })
-    $(document).ajaxSuccess(function () {
-        window.location.reload();
-    });
+    // $(document).ajaxSuccess(function () {
+    //     location.reload();
+    // });
 });
 
     $( function() {
@@ -46,7 +46,7 @@ $(document).ready(function () {
                     cache: false,
                     success: function (data) {
                         $("#test").html(data);
-                        return false;
+                        location.reload();
                     }
                 })
                 }
@@ -80,7 +80,7 @@ async function revealReelCreation() {
             url: "/reveal_reel_creation_box",
             cache: false,
             success: function (data) {
-                return false;
+                location.reload();
             }
         })
         
@@ -116,7 +116,32 @@ async function hideReelCreation() {
             url: "/reveal_reel_creation_box",
             cache: false,
             success: function (data) {
-                return false;
+                location.reload();
             }
         })
+}
+
+
+function audioPlayer(element) {
+    $('a.reel-a').click(function (e) {
+        e.preventDefault()
+        $(this).unbind('click')
+    })
+    let audio = element.children[0]
+    let parentID = element.parentElement.id
+    let progress = element.parentElement.children[2].children[0];
+    console.log(progress)
+    if (element.id == 'play-icon') {
+        element.id = 'pause-icon'
+        audio.play()
+        element.parentElement.style.backgroundColor = 'rgba(97, 97, 97, .5)'
+        //progressbar functionality:
+        audio.addEventListener('timeupdate', function () {
+            progress.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
+        })
+    } else {
+        element.id = 'play-icon'
+        audio.pause()
+        element.parentElement.style.backgroundColor = 'transparent'
+    }
 }

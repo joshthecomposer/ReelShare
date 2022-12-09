@@ -92,17 +92,23 @@
                         <div class="column">
                                 <h2>YOUR REELS</h2>
                                         {%for r in all_reels%}
-                                            <a class="reel-a" href="/reel/view/{{r.id}}">
+                                        <a class="reel-a" href="/reel/view/{{r.id}}">
                                             <div class="reel-box">
                                                 <p class="reel-name">{{r.name}}</p>
-                                                    <ul id="{{r.id}}" class="droppable">
-                                                        {%for t in r.tracks%}
-                                                        <li class="track-container">
-                                                            <button id="play-icon"></button>
-                                                            <p class="track-title">{{t.title}}</p>
-                                                            <audio class="track" src="{{ url_for('static', filename=t.path) }}">
+                                                <ul id="{{r.id}}" class="droppable">
+                                                    {%for f in r.tracks%}
+                                                        <li id="{{f.id}}" class="track-container">
+                                                                <button id="play-icon" onclick="audioPlayer(this)">
+                                                                    <audio class="track" src="{{ url_for('static', filename=f.path) }}">
+                                                                </button>
+                                                                <p class="track-title">{{f.title}}</p>
+                                                                <div class="progBarBox">
+                                                                    <div class="progBar" id='{{"progBar-" + f.id|string}}'></div>
+                                                                </div>
+                                                                <!-- <input type="range" id-="seek-slider" max="100" value="0">
+                                                                <input type="range" id="volume-slider" max="100" value="100"> -->
                                                         </li>
-                                                        {%endfor%}
+                                                    {%endfor%}
                                                     </ul>
                                                 </div>
                                             </a>
@@ -114,9 +120,15 @@
                             <ul>
                             {%for f in all_files%}
                                 <li id="{{f.id}}" class="track-container draggable">
-                                        <button id="play-icon"></button>
+                                        <button id="play-icon" onclick="audioPlayer(this)">
+                                            <audio class="track" src="{{ url_for('static', filename=f.path) }}">
+                                        </button>
                                         <p class="track-title">{{f.title}}</p>
-                                        <audio class="track" src="{{ url_for('static', filename=f.path) }}">
+                                        <div class="progBarBox">
+                                            <div class="progBar" id='{{"progBar-" + f.id|string}}'></div>
+                                        </div>
+                                        <!-- <input type="range" id-="seek-slider" max="100" value="0">
+                                        <input type="range" id="volume-slider" max="100" value="100"> -->
                                 </li>
                             {%endfor%}
                             </ul>
