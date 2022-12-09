@@ -20,9 +20,7 @@
         </div>
     </nav>
     <main>
-
-    {%if session['reel_creation'] == true%}
-        <div  id="reel_creation" class="container">
+        <div  id="reel_creation" class="container" style="display:none;">
             <div class="container">
                 <div id="reg" class="hero p-5">
                     <h2 class="form-h2">REEL CREATION</h2>
@@ -32,14 +30,14 @@
                             <input class="form-control" type="text" name="name">
                                 <button type="submit" class="button-3">CREATE</button>
                             <div>
-                                <button id="revealReelCreationButton" class="button-4" onclick="hideReelCreation()">BACK</button>
                             </div>
                         </form>
+                        <button id="revealReelCreationButton" class="button-4" onclick="hideReelCreation()">BACK</button>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="blurry">
+        <div id="blur">
             <div class="container">
                 <div class="d-container">
                         <div class="column reels">
@@ -105,74 +103,6 @@
                     </div>
                 </div>
             </div>
-        {%elif session['reel_creation'] == false or 'reel_creation' not in session %}
-        <div id="not_blurry">
-            <div class="container">
-                <div class="d-container">
-                        <div class="column reels">
-                                <h2>YOUR REELS</h2>
-                                        {%for r in all_reels%}
-                                        <a class="reel-a" href="/reel/view/{{r.id}}">
-                                            <div class="reel-box">
-                                                <p class="reel-name">{{r.name}}</p>
-                                                <ul id="{{r.id}}" class="droppable">
-                                                    {% if r.tracks == [] %}
-                                                        <p class="reel-placeholder" style="width:400px; height:3.5rem; color:lightgray;"></p>
-                                                    {%endif%}
-                                                    {%for f in r.tracks%}
-                                                        <li id="{{f.id}}" class="track-container">
-                                                                <button id="play-icon" onclick="audioPlayer(this)">
-                                                                    <audio class="track" src="{{ url_for('static', filename=f.path) }}">
-                                                                </button>
-                                                                <p class="track-title">{{f.title}}</p>
-                                                                <div class="progBarBox">
-                                                                    <div class="progBar" id='{{"progBar-" + f.id|string}}'></div>
-                                                                </div>
-                                                                <!-- <input type="range" id-="seek-slider" max="100" value="0">
-                                                                <input type="range" id="volume-slider" max="100" value="100"> -->
-                                                        </li>
-                                                    {%endfor%}
-                                                    </ul>
-                                                </div>
-                                            </a>
-                                        {%endfor%}
-                            <button id="revealReelCreationButton" class="button-3" onclick="revealReelCreation()">CREATE A NEW REEL</button>
-                        </div>
-                        <div class="column tracks">
-                            <h2>YOUR TRACKS</h2>
-                            <ul>
-                            {%for f in all_files%}
-                                <li id="{{f.id}}" class="track-container draggable">
-                                        <button id="play-icon" onclick="audioPlayer(this)">
-                                            <audio class="track" src="{{ url_for('static', filename=f.path) }}">
-                                        </button>
-                                        <p class="track-title">{{f.title}}</p>
-                                        <div class="progBarBox">
-                                            <div class="progBar" id='{{"progBar-" + f.id|string}}'></div>
-                                        </div>
-                                        <!-- <input type="range" id-="seek-slider" max="100" value="0">
-                                        <input type="range" id="volume-slider" max="100" value="100"> -->
-                                </li>
-                            {%endfor%}
-                            </ul>
-                            <div class="d-container">
-                                <div class="form-group upload">
-                                    <h2>UPLOAD AUDIO</h2>
-                                    <form method=post enctype=multipart/form-data>
-                                        <input class="d-form-control" type="text" name="title" placeholder="TITLE">
-                                        <input class="custom-file-input" type=file name=file>
-                                        <div>
-                                            <button type="submit" class="button-3">UPLOAD</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        {%endif%}
     </main>
 </body>
 </html>

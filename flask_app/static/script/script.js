@@ -1,5 +1,5 @@
 let blurElement = document.getElementById('not_blurry');
-let hideElement = document.getElementById('reel_creation');
+let reel_creation = document.getElementById('reel_creation');
 
 $(document).ready(function () {
     $("ul.sortable").sortable({
@@ -64,39 +64,16 @@ function updateOrder() {
     return item_order;
 }
 
-async function revealReelCreation() {
-    var filterVal = 'blur(30px)';
-    var opacity = 'opacity(100%)'
-    
-        $.ajax({
-            method: "POST",
-            url: "/reveal_reel_creation_box",
-            cache: false,
-            beforeSend: function () {
-                $(hideElement).fadeIn()
-            },
-            success: function (data) {
-                location.reload();
-            }
-        })
-        
+function revealReelCreation() {
+    $(reel_creation).fadeIn()
+    $(blurElement).blur()
+}
+function hideReelCreation() {
+    $(reel_creation).fadeOut()
+    $(blurElement).blur()
 }
 
 //TODO: Reel creation can be done client-side instead of duplicating the reels stuff.
-
-async function hideReelCreation() {
-        $.ajax({
-            method: "POST",
-            url: "/reveal_reel_creation_box",
-            cache: false,
-            beforeSend: function () {
-                $(hideElement).fadeOut()
-            },
-            success: function (data) {
-                location.reload();
-            }
-        })
-}
 
 function audioPlayer(element) {
     $('a.reel-a').click(function (e) {
