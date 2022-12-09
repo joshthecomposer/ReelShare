@@ -42,6 +42,7 @@
                 <div class="d-container">
                         <div class="column reels">
                                 <h2>YOUR REELS</h2>
+                                <button id="revealReelCreationButton" class="button-3" onclick="revealReelCreation()">CREATE A NEW REEL</button>
                                         {%for r in all_reels%}
                                         <a class="reel-a" href="/reel/view/{{r.id}}">
                                             <div class="reel-box">
@@ -67,7 +68,6 @@
                                                 </div>
                                             </a>
                                         {%endfor%}
-                            <button id="revealReelCreationButton" class="button-3" onclick="revealReelCreation()">CREATE A NEW REEL</button>
                         </div>
                         <div class="column tracks">
                             <h2>YOUR TRACKS</h2>

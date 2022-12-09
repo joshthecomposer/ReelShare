@@ -52,7 +52,8 @@ class Reel:
                     LEFT JOIN reel_list ON reels.id = reel_list.reel_id
                     LEFT JOIN files ON files.id = reel_list.file_id
                     WHERE reels.user_id = %(user_id)s
-                    GROUP BY reels.id;"""
+                    GROUP BY reels.id
+                    ORDER BY reels.id DESC;"""
         result2 = connectToMySQL(DB).query_db(query2, data)
 
         data = {
