@@ -73,28 +73,7 @@ async function revealReelCreation() {
             url: "/reveal_reel_creation_box",
             cache: false,
             beforeSend: function () {
-                $(hideElement).css({
-                    'filter':opacity,
-                    'webkitFilter':opacity,
-                    'mozFilter':opacity,
-                    'oFilter':opacity,
-                    'msFilter':opacity,
-                    'transition':'all 0.5s ease-out',
-                    '-webkit-transition':'all 0.5s ease-out',
-                    '-moz-transition':'all 0.5s ease-out',
-                    '-o-transition':'all 0.5s ease-out'
-                });
-                $(blurElement).css({
-                    'filter':filterVal,
-                    'webkitFilter':filterVal,
-                    'mozFilter':filterVal,
-                    'oFilter':filterVal,
-                    'msFilter':filterVal,
-                    'transition':'all 0.5s ease-out',
-                    '-webkit-transition':'all 0.5s ease-out',
-                    '-moz-transition':'all 0.5s ease-out',
-                    '-o-transition':'all 0.5s ease-out'
-                }); 
+                $(hideElement).fadeIn()
             },
             success: function (data) {
                 location.reload();
@@ -106,35 +85,12 @@ async function revealReelCreation() {
 //TODO: Reel creation can be done client-side instead of duplicating the reels stuff.
 
 async function hideReelCreation() {
-        var opacity = 'opacity(0%)';
-        var filterVal = 'blur(0px)';
         $.ajax({
             method: "POST",
             url: "/reveal_reel_creation_box",
             cache: false,
             beforeSend: function () {
-                $(hideElement).css({
-                    'filter':opacity,
-                    'webkitFilter':opacity,
-                    'mozFilter':opacity,
-                    'oFilter':opacity,
-                    'msFilter':opacity,
-                    'transition':'all 0.5s ease-out',
-                    '-webkit-transition':'all 0.5s ease-out',
-                    '-moz-transition':'all 0.5s ease-out',
-                    '-o-transition':'all 0.5s ease-out'
-                });
-                $(blurElement).css({
-                    'filter':filterVal,
-                    'webkitFilter':filterVal,
-                    'mozFilter':filterVal,
-                    'oFilter':filterVal,
-                    'msFilter':filterVal,
-                    'transition':'all 0.5s ease-out',
-                    '-webkit-transition':'all 0.5s ease-out',
-                    '-moz-transition':'all 0.5s ease-out',
-                    '-o-transition':'all 0.5s ease-out'
-                });
+                $(hideElement).fadeOut()
             },
             success: function (data) {
                 location.reload();
