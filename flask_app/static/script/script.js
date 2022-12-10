@@ -23,47 +23,42 @@ $(document).ready(function () {
             })
         }
     })
-    // $(document).ajaxSuccess(function () {
-    //     location.reload();
-    // });
 });
 
-    $( function() {
-        $(".draggable").draggable({
-            helper: "clone",
-            revert: "invalid"
-        });
-        $(".droppable").droppable({
-            drop: function (event, ui) {
-                console.log(event)
-                console.log (event.target.children.length)
-                console.log(event.target.children, "is the event target's chidlrean")
-                console.log(ui.draggable[0])
-                $(event.target).append(
-                    ui.draggable
-                    )
-                $.ajax({
-                    method: "POST",
-                    url: "/save_track_to_reel",
-                    data: {
-                        target_id : event.target.id,
-                        origin_id : ui.draggable[0].id
-                    },
-                    beforeSend: function () {
-                        event.target.style.height = '0px'
-                    } 
-                    ,
-                        
-                    cache: false,
-                    success: function (data) {
-                        $("#test").html(data);
-                        // window.location.reload();
-                        return false;
-                    }
-                })
-                }
-        });
+$( function() {
+    $(".draggable").draggable({
+        helper: "clone",
+        revert: 'invalid'
     });
+    $(".droppable").droppable({
+        drop: function (event, ui) {
+            for (var i = 0; i < event.target.children.length; i++) {
+                console.log(ui.draggable.attr('id'))
+                if (ui.draggable.attr('id') == event.target.children[i].id) {
+                    return false;
+                }
+            }
+            if (event.target.children[0].id == 'reel-placeholder') {
+                event.target.children[0].remove()
+            }
+            $(event.target).append(
+                ui.draggable
+            )
+            $.ajax({
+                method: "POST",
+                url: "/save_track_to_reel",
+                data: {
+                    target_id : event.target.id,
+                    origin_id : ui.draggable[0].id
+                },
+                cache: false,
+                success: function () {
+                    return false;
+                }
+            })
+            }
+    });
+});
 
 function updateOrder() {
     var item_order = new Array();
@@ -71,7 +66,7 @@ function updateOrder() {
         item_order.push($(this).attr("id"));
     })
     return item_order;
-}
+};
 
 function revealReelCreation() {
     filterVal = "blur(15px)"
@@ -87,8 +82,8 @@ function revealReelCreation() {
         '-moz-transition':'all 0.5s ease-in',
         '-o-transition':'all 0.5s ease-in'
     });
-    console.log()
-}
+};
+
 function revealLogin() {
     filterVal = "blur(15px)"
     if (isBlurry == true) {
@@ -111,7 +106,8 @@ function revealLogin() {
             '-o-transition':'all 0.5s ease-in'
         });
     }
-}
+};
+
 function revealReg() {
     filterVal = "blur(15px)"
     if (isBlurry == true) {
@@ -134,7 +130,8 @@ function revealReg() {
             '-o-transition':'all 0.5s ease-in'
         });
     }
-}
+};
+
 function hideReelCreation() {
     filterVal = "blur(0)"
     $(reel_creation).fadeOut(500)
@@ -183,7 +180,7 @@ function hideReg() {
     });
     isBlurry = false;
 }
-    
+
 function audioPlayer(element) {
     $('a.reel-a').click(function (e) {
         e.preventDefault()
@@ -197,7 +194,6 @@ function audioPlayer(element) {
         element.id = 'pause-icon'
         audio.play()
         element.parentElement.style.backgroundColor = 'rgba(97, 97, 97, .5)'
-        //progressbar functionality:
         audio.addEventListener('timeupdate', function () {
             progress.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
         })
@@ -220,7 +216,6 @@ function audioPlayerReel(element) {
         element.id = 'pause-icon-reel'
         audio.play()
         element.parentElement.style.backgroundColor = 'rgba(97, 97, 97, .5)'
-        //progressbar functionality:
         audio.addEventListener('timeupdate', function () {
             progress.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
         })
