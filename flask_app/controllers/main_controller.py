@@ -50,11 +50,10 @@ def dashboard():
     if not all_reels:
         all_reels = reel.Reel.get_reels(data)
         return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
-    
+    one_user = all_reels
     all_reels = all_reels.reels
     # for r in all_reels:
     #     print(f"reel: {r.name} tracks: {r.tracks}")
-
     return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
 
 @app.route('/clear')

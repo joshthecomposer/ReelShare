@@ -49,7 +49,7 @@ class File:
         query = """SELECT * FROM files 
                     JOIN reel_list ON files.id = reel_list.file_id 
                     JOIN reels ON reels.id = reel_list.reel_id 
-                    WHERE reels.name = %(name)s 
+                    WHERE reels.id = %(id)s 
                     ORDER BY reel_list._order;"""
         return connectToMySQL(DB).query_db(query, data)
     

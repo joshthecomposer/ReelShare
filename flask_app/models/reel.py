@@ -79,7 +79,7 @@ class Reel:
             data = {
                 'user_id' : row['user_id'],
                 'title' : row['title'],
-                'name' : one_reel.name
+                'id' : one_reel.id
             }
             
             tracklist = file.File.get_tracklist(data)
@@ -100,3 +100,11 @@ class Reel:
         if result:
             is_valid = False
         return is_valid
+    
+    @classmethod
+    def delete(cls, data):
+        query2 = "DELETE FROM reel_list WHERE reel_id = %(id)s;"
+        query = "DELETE FROM reels WHERE id = %(id)s;"
+        connectToMySQL(DB).query_db(query2, data)
+        connectToMySQL(DB).query_db(query, data)
+        return False

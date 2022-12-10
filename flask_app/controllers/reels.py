@@ -8,6 +8,7 @@ def create_reel():
         "user_id" : session['user_id'],
         "name" : request.form['name']
     }
+    print(data)
     is_valid = reel.Reel.validate(data)
     if is_valid:
         reel.Reel.save(data)
@@ -55,3 +56,11 @@ def reel_creation_box():
     else: 
         session['reel_creation'] = True
     return jsonify(session['reel_creation'])
+
+@app.route('/delete_reel', methods=['POST'])
+def delete_reel():
+    data = {
+        'id' : request.form['reel_id']
+    }
+    reel.Reel.delete(data)
+    return redirect('/dashboard')

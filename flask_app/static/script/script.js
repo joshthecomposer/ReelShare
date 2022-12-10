@@ -9,7 +9,6 @@ $(document).ready(function () {
     $("ul.sortable").sortable({
         update: function (event, ui) {
             item_order = updateOrder();
-            console.log("Item order is: ", item_order);
             order_string = 'order=' + item_order;
             item_order = order_string
             $.ajax({
@@ -33,7 +32,6 @@ $( function() {
     $(".droppable").droppable({
         drop: function (event, ui) {
             for (var i = 0; i < event.target.children.length; i++) {
-                console.log(ui.draggable.attr('id'))
                 if (ui.draggable.attr('id') == event.target.children[i].id) {
                     return false;
                 }
@@ -53,6 +51,7 @@ $( function() {
                 },
                 cache: false,
                 success: function () {
+                    location.reload()
                     return false;
                 }
             })
@@ -191,7 +190,6 @@ function audioPlayer(element) {
     let audio = element.children[0]
     let parentID = element.parentElement.id
     let progress = element.parentElement.children[2].children[0];
-    console.log(progress)
     if (element.id == 'play-icon') {
         element.id = 'pause-icon'
         audio.play()
@@ -226,3 +224,21 @@ function audioPlayerReel(element) {
         element.parentElement.style.backgroundColor = 'transparent'
     }
 };
+
+function deleteReel(reel) {
+    $('a.reel-a').click(function (e) {
+        e.preventDefault()
+        $(this).unbind('click')
+    })
+    data = 'reel_id=' + reel
+    $.ajax({
+        method: "POST",
+        url: "/delete_reel",
+        data: data,
+        cache: false,
+        success: function () {
+            location.reload()
+        }
+    })
+
+}
