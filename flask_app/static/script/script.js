@@ -147,7 +147,8 @@ function hideReelCreation() {
         '-o-transition':'all 0.5s ease-in'
     });
     isBlurry = false;
-}
+};
+
 function hideLogin() {
     filterVal = "blur(0)"
     $(loginElement).fadeOut(500)
@@ -163,7 +164,8 @@ function hideLogin() {
         '-o-transition':'all 0.5s ease-in'
     });
     isBlurry = false;
-}
+};
+
 function hideReg() {
     filterVal = "blur(0)"
     $(regElement).fadeOut(500)
@@ -179,7 +181,7 @@ function hideReg() {
         '-o-transition':'all 0.5s ease-in'
     });
     isBlurry = false;
-}
+};
 
 function audioPlayer(element) {
     $('a.reel-a').click(function (e) {
@@ -202,7 +204,8 @@ function audioPlayer(element) {
         audio.pause()
         element.parentElement.style.backgroundColor = 'transparent'
     }
-}
+};
+
 function audioPlayerReel(element) {
     $('a.reel-a').click(function (e) {
         e.preventDefault()
@@ -224,4 +227,4 @@ function audioPlayerReel(element) {
         audio.pause()
         element.parentElement.style.backgroundColor = 'transparent'
     }
-}
+};
