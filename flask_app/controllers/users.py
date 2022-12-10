@@ -13,7 +13,6 @@ def register():
     user_exists = user.User.check_user_info(data)
     if user_exists:
         flash('Email or Username already registered')
-        session['form_tried'] = 'register'
         return redirect('/')
     is_valid = user.User.validate(request.form)
     if is_valid == True:
@@ -29,7 +28,6 @@ def register():
         session['user_id'] = user_id
         session['username'] = data['username']
         return redirect('/dashboard')
-    session['form_tried'] = 'register'
     return redirect('/dashboard')
 
 @app.route('/login', methods=['POST'])
@@ -40,11 +38,9 @@ def login():
     user_exists = user.User.email_lookup(data)
     if not user_exists:
         flash('Email/Password invalid')
-        session['form_tried'] = 'login'
         return redirect('/')
     if not bcrypt.check_password_hash(user_exists[0]['password'], request.form['password']):
         flash('Email/Password invalid')
-        session['form_tried'] = 'login'
         return redirect('/')
     session['username'] = user_exists[0]['username']
     session['user_id'] = user_exists[0]['id']
@@ -57,4 +53,11 @@ def view_register():
 @app.route('/view/login')
 def view_login():
     return render_template('view_login.html')
+
+@app.route('/delete')
+def delete_user():
+    data = {
+        'one_user' : session['current_user']
+    }
+    return redirect('/clear')
 

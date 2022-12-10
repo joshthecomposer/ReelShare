@@ -8,7 +8,7 @@ def tracklist_update():
     if request.method == 'POST':
         getorder = request.form['order']
     getorder = getorder.split(',')
-    o = 10
+    o = 1
     for i in getorder:
         data = {
             "id" : i,
@@ -16,7 +16,7 @@ def tracklist_update():
             "reel_id" : session['reel_id']
         }
         file.File.update_order(data)
-        o += 10
+        o += 1
     return jsonify(getorder)
 
 @app.route('/delete_file', methods=['POST'])

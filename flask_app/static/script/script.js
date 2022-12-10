@@ -5,7 +5,7 @@ let regElement = document.getElementById('registration');
 let isBlurry = false;
 let reel_view = false;
 
-$(document).ready(function () {
+$(function () {
     $("ul.sortable").sortable({
         update: function (event, ui) {
             item_order = updateOrder();

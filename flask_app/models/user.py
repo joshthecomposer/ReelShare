@@ -54,3 +54,8 @@ class User:
         os.mkdir(folder)
         query = 'INSERT INTO users (username, email, password) VALUES (%(username)s, %(email)s, %(password)s)'
         return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def delete(cls, data):
+        pass
+        
