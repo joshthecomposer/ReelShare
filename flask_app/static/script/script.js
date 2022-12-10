@@ -212,9 +212,7 @@ function audioPlayerReel(element) {
         $(this).unbind('click')
     })
     let audio = element.children[0]
-    let parentID = element.parentElement.id
     let progress = element.parentElement.children[2].children[0];
-    console.log(progress)
     if (element.id == 'play-icon-reel') {
         element.id = 'pause-icon-reel'
         audio.play()
