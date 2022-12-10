@@ -14,14 +14,12 @@
         <nav>
             <div class="container">
                 <h1>SoundFlask.io</h1>
-                <a onclick="revealReelCreation()">LOGIN</a>
-                <a href="/view/register">
-                    <button class="button-1" formaction=>SIGN UP</button>
-                </a>
+                <a onclick="revealLogin()">LOGIN</a>
+                <button class="button-1" onclick="revealReg()">SIGN UP</button>
             </div>
         </nav>
         <main>
-            <div id="reel_creation" class="container" style="display:none;">
+            <div id="login" class="container" style="display:none;">
                 <div id="reg" class="hero p-5">
                     <h2 class="form-h2">LOGIN</h2>
                     <hr>
@@ -33,18 +31,47 @@
                             <input class="form-control" type="password" name="password">
                             <button type="submit" class="button-3">Login</button>
                         </form>
-                        <button id="revealReelCreationButton" class="button-4" onclick="hideReelCreation()">BACK</button>
+                        <button id="revealReelCreationButton" class="button-4" onclick="hideLogin()">BACK</button>
                     </div>
-                    <!-- <img src="https://via.placeholder.com/640x360.png?text=DEMO+VIDEO+HERE+OR+IMG+HERE" alt=""> -->
-    
                     <div class="hero-description">
                         <p class="form-subtext">
-                            Need to create an account? <a href="/view/register">Sign up</a> here.
+                            Need to create an account? <a class="form-a" onclick="revealReg()">Sign up</a> here.
                         </p>
                     </div>
                     <!-- <button class="button-2">TRY IT OUT NOW</button> -->
                 </div>
             </div>
+            <div id='registration' class="container" style="display:none;">
+                <div id="reg" class="hero p-5">
+                    <h2 class="form-h2">LET'S GET STARTED</h2>
+                    <div class="form-group">
+                        <form action="/register" method="POST">
+                            <label for="first_name">Username:</label>
+                            <input class="form-control" type="text" name="username">
+    
+                            <label for="email" type="text" name="email">Email:</label>
+                            <input class="form-control" type="text" name="email">
+        
+                            <label for="password">Password:</label>
+                            <input class="form-control" type="password" name="password">
+        
+                            <label for="p_confirm">Confirm Password:</label>
+                            <input class="form-control" type="password" name="p_confirm">
+        
+                            <button type="submit" class="button-3">Register</button>
+                        </form>
+                    <!-- <img src="https://via.placeholder.com/640x360.png?text=DEMO+VIDEO+HERE+OR+IMG+HERE" alt=""> -->
+                        <button id="revealReelCreationButton" class="button-4" onclick="hideReg()">BACK</button>
+    
+                    <div class="hero-description">
+                        <p class="form-subtext">
+                            Already have an account? <a class="form-a" onclick="revealLogin()">Sign in</a> instead.
+                        </p>
+                    </div>
+                    <!-- <button class="button-2">TRY IT OUT NOW</button> -->
+                </div>
+            </div>
+        </div>
         <div id="blur">
             <div class="container">
                 <div class="hero">
@@ -57,8 +84,7 @@
                             Soundflask is your tool for organizing and designing audio reels to send to clients. We offer user customizablity per-reel and tracking of client listening patterns so you can perfect your that first impression and win over clients.
                         </p>
                     </div>
-                    <!-- TODO: add anchor around button that goes to signs up -->
-                    <button class="button-2">TRY IT OUT NOW</button>
+                    <button class="button-2" onclick="revealReg()">TRY IT OUT NOW</button>
                 </div>
             </div>
         </div>

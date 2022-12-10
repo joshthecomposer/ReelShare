@@ -70,6 +70,15 @@ nav {
     height: 2rem;
 }
 
+.form-a {
+    text-decoration: underline;
+    
+}
+.form-a:hover {
+    cursor:pointer;
+
+}
+
 .column {
     display: flex;
     flex-direction: column;
@@ -434,4 +443,79 @@ audio::-webkit-media-controls-play-button {
 
 .progBarBox {
     width: 200px;
+}
+
+#login {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    margin: auto;
+    background-color: rgba(19,17,28,1);
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+}
+#registration{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    margin: auto;
+    background-color: rgba(19,17,28,1);
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+}
+
+/* reel view audio player stuff */
+
+.track-container-reel {
+    display: flex;
+    align-items: center;
+    width: 900px;
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+    border-collapse: collapse;
+    margin-top: -1px;
+    height: 7rem;
+}
+
+.track-container-reel:hover {
+    background-color:rgba(97, 97, 97, .5);
+    cursor: default;
+}
+
+#play-icon-reel {
+    background-image: url('/static/img/play.png');
+    height: 3rem;
+    width: 3rem;
+    background-size: cover;
+    background-color: transparent;
+    margin-right: 3rem;
+}
+
+#pause-icon-reel {
+    background-image: url('/static/img/pause.png');
+    height: 3rem;
+    width: 3rem;
+    background-size: cover;
+    background-color: transparent;
+    margin-right: 3rem;
+}
+
+
+.progBar-reel {
+    background-color: white;
+    height: 2px;
+    width: 0;
+    border-radius: 3px;
+    margin-left: 2rem;
+    width: 0;
+}
+
+.progBarBox-reel {
+    width: 200px;
+}
+
+.track-title-reel {
+    font-size: 2rem;
 }

@@ -1,5 +1,9 @@
 let blurElement = document.querySelector('#blur');
 let reel_creation = document.getElementById('reel_creation');
+let loginElement = document.getElementById('login');
+let regElement = document.getElementById('registration');
+let isBlurry = false;
+let reel_view = false;
 
 $(document).ready(function () {
     $("ul.sortable").sortable({
@@ -33,13 +37,6 @@ $(document).ready(function () {
             drop: function (event, ui) {
                 console.log(event)
                 console.log (event.target.children.length)
-                // for (var i = 0; i < event.target.children.length; i++) {
-                //     if (event.target.children[i].id == ui.draggable.id)
-                //         window.location.reload();
-                //         return
-                // }
-
-                //TODO: SPACER NEEDS TO BE REMOVED. THAT' WHY REEL MESSES UP HEIGHT WHEN DRAGGING.
                 console.log(event.target.children, "is the event target's chidlrean")
                 console.log(ui.draggable[0])
                 $(event.target).append(
@@ -92,6 +89,52 @@ function revealReelCreation() {
     });
     console.log()
 }
+function revealLogin() {
+    filterVal = "blur(15px)"
+    if (isBlurry == true) {
+        setTimeout(function () { 
+            $(loginElement).fadeIn(500)
+        }, 500)
+        $(regElement).fadeOut(500)
+    } else {
+        $(loginElement).fadeIn(500)
+        $(regElement).fadeOut(500)
+        $(blurElement).css({
+            'filter':filterVal,
+            'webkitFilter':filterVal,
+            'mozFilter':filterVal,
+            'oFilter':filterVal,
+            'msFilter': filterVal,
+            'transition':'all 0.5s ease-in',
+            '-webkit-transition':'all 0.5s ease-in',
+            '-moz-transition':'all 0.5s ease-in',
+            '-o-transition':'all 0.5s ease-in'
+        });
+    }
+}
+function revealReg() {
+    filterVal = "blur(15px)"
+    if (isBlurry == true) {
+        setTimeout(function () { 
+            $(regElement).fadeIn(500)
+        }, 500)
+        $(loginElement).fadeOut(500)
+    } else {
+        $(regElement).fadeIn(500)
+        $(loginElement).fadeOut(500)
+        $(blurElement).css({
+            'filter':filterVal,
+            'webkitFilter':filterVal,
+            'mozFilter':filterVal,
+            'oFilter':filterVal,
+            'msFilter': filterVal,
+            'transition':'all 0.5s ease-in',
+            '-webkit-transition':'all 0.5s ease-in',
+            '-moz-transition':'all 0.5s ease-in',
+            '-o-transition':'all 0.5s ease-in'
+        });
+    }
+}
 function hideReelCreation() {
     filterVal = "blur(0)"
     $(reel_creation).fadeOut(500)
@@ -106,6 +149,39 @@ function hideReelCreation() {
         '-moz-transition':'all 0.5s ease-in',
         '-o-transition':'all 0.5s ease-in'
     });
+    isBlurry = false;
+}
+function hideLogin() {
+    filterVal = "blur(0)"
+    $(loginElement).fadeOut(500)
+    $(blurElement).css({
+        'filter':filterVal,
+        'webkitFilter':filterVal,
+        'mozFilter':filterVal,
+        'oFilter':filterVal,
+        'msFilter':filterVal,
+        'transition':'all 0.5s ease-in',
+        '-webkit-transition':'all 0.5s ease-in',
+        '-moz-transition':'all 0.5s ease-in',
+        '-o-transition':'all 0.5s ease-in'
+    });
+    isBlurry = false;
+}
+function hideReg() {
+    filterVal = "blur(0)"
+    $(regElement).fadeOut(500)
+    $(blurElement).css({
+        'filter':filterVal,
+        'webkitFilter':filterVal,
+        'mozFilter':filterVal,
+        'oFilter':filterVal,
+        'msFilter':filterVal,
+        'transition':'all 0.5s ease-in',
+        '-webkit-transition':'all 0.5s ease-in',
+        '-moz-transition':'all 0.5s ease-in',
+        '-o-transition':'all 0.5s ease-in'
+    });
+    isBlurry = false;
 }
     
 function audioPlayer(element) {
@@ -127,6 +203,29 @@ function audioPlayer(element) {
         })
     } else {
         element.id = 'play-icon'
+        audio.pause()
+        element.parentElement.style.backgroundColor = 'transparent'
+    }
+}
+function audioPlayerReel(element) {
+    $('a.reel-a').click(function (e) {
+        e.preventDefault()
+        $(this).unbind('click')
+    })
+    let audio = element.children[0]
+    let parentID = element.parentElement.id
+    let progress = element.parentElement.children[2].children[0];
+    console.log(progress)
+    if (element.id == 'play-icon-reel') {
+        element.id = 'pause-icon-reel'
+        audio.play()
+        element.parentElement.style.backgroundColor = 'rgba(97, 97, 97, .5)'
+        //progressbar functionality:
+        audio.addEventListener('timeupdate', function () {
+            progress.style.width = ((audio.currentTime / audio.duration) * 100) + '%';
+        })
+    } else {
+        element.id = 'play-icon-reel'
         audio.pause()
         element.parentElement.style.backgroundColor = 'transparent'
     }

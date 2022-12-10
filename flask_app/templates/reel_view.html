@@ -34,11 +34,18 @@
                     <div class="column">
                             <h2>{{one_reel.name}} OVERVIEW</h2>
                             <ul class="sortable" style="min-width:400px; min-height: 2000px;">
-                                {%for t in one_reel.tracks%}
-                                    <li id="{{t.id}}" class="audio-box">
-                                        <p class="reel-name">{{t.title}}</p>
-                                        <audio controls src="{{ url_for('static', filename=t.path) }}"></audio>
-                                    </li>
+                                {%for f in one_reel.tracks%}
+                                <li id="{{f.id}}" class="track-container-reel">
+                                    <button id="play-icon-reel" onclick="audioPlayerReel(this)">
+                                        <audio class="track" src="{{ url_for('static', filename=f.path) }}">
+                                    </button>
+                                    <p class="track-title-reel">{{f.title}}</p>
+                                    <div class="progBarBox-reel">
+                                        <div class="progBar-reel" id='{{"progBar-" + f.id|string}}'></div>
+                                    </div>
+                                    <!-- <input type="range" id-="seek-slider" max="100" value="0">
+                                    <input type="range" id="volume-slider" max="100" value="100"> -->
+                                </li>
                                 {%endfor%}
                             </ul>
                     </div>
