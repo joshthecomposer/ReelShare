@@ -60,6 +60,7 @@
                                                             <div class="progBarBox">
                                                                 <div class="progBar" id='{{"progBar-" + f.id|string}}'></div>
                                                             </div>
+                                                            <div class="delete-icon" onclick="deleteFile({{ f.id }})"></div>
                                                         </li>
                                                     {%endfor%}
                                                     </ul>
@@ -80,6 +81,7 @@
                                         <div class="progBarBox">
                                             <div class="progBar" id='{{"progBar-" + f.id|string}}'></div>
                                         </div>
+                                        <div class="delete-icon" onclick="deleteFile({{f.id}})"></div>
                                         <!-- <input type="range" id-="seek-slider" max="100" value="0">
                                         <input type="range" id="volume-slider" max="100" value="100"> -->
                                 </li>

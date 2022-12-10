@@ -18,3 +18,12 @@ def tracklist_update():
         file.File.update_order(data)
         o += 10
     return jsonify(getorder)
+
+@app.route('/delete_file', methods=['POST'])
+def delete_file():
+    data = {
+        'id' : request.form['file_id'],
+        'user_id' : session['user_id']
+    }
+    file.File.delete(data)
+    return jsonify(data)

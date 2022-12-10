@@ -411,6 +411,7 @@ audio::-webkit-media-controls-play-button {
 .track-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     width: 400px;
     border-top: 1px solid white;
     border-bottom: 1px solid white;
@@ -457,7 +458,7 @@ audio::-webkit-media-controls-play-button {
 }
 
 .progBarBox {
-    width: 200px;
+    width: 150px;
 }
 
 #login {
@@ -533,4 +534,14 @@ audio::-webkit-media-controls-play-button {
 
 .track-title-reel {
     font-size: 2rem;
+}
+
+.delete-icon {
+    display: flex;
+    background-image: url('/static/img/x-icon.png');
+    height: 1.6rem;
+    width: 1.6rem;
+    background-size: cover;
+    background-color: transparent;
+    justify-self: flex-end;
 }

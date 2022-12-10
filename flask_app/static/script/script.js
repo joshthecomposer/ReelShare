@@ -240,5 +240,22 @@ function deleteReel(reel) {
             location.reload()
         }
     })
+}
 
+function deleteFile(file) {
+    $('a.reel-a').click(function (e) {
+        e.preventDefault()
+        $(this).unbind('click')
+    })
+    data = 'file_id=' + file
+    console.log(data)
+    $.ajax({
+        method: "POST",
+        url: "/delete_file",
+        data: data,
+        cache: false,
+        success: function () {
+            location.reload()
+        }
+    })
 }

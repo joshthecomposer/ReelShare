@@ -1,4 +1,5 @@
 from flask import flash
+import os
 from flask_app.config.mysqlconnection import connectToMySQL
 
 ALLOWED_EXTENSIONS = {'wav', 'mp3', 'aif'}
@@ -64,4 +65,16 @@ class File:
     @classmethod
     def update_order(cls, data):
         query = "UPDATE reel_list SET _order = %(_order)s WHERE file_id = %(id)s AND reel_id = %(reel_id)s;"
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def delete(cls, data):
+        query = "SELECT * FROM files WHERE id = %(id)s AND user_id = %(user_id)s;"
+        result = connectToMySQL(DB).query_db(query, data)
+        _path = result[0]['path']
+        query = "DELETE FROM reel_list WHERE file_id = %(id)s;"
+        result = connectToMySQL(DB).query_db(query, data)
+        query = "DELETE FROM files WHERE id = %(id)s AND user_id = %(user_id)s;"
+        
+        os.remove(f'flask_app/static/{_path}')
         return connectToMySQL(DB).query_db(query, data)
