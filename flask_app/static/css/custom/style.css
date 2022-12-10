@@ -98,6 +98,7 @@ nav a {
 
 nav a:hover {
     color: white;
+    cursor: pointer;
 }
 
 nav h1 {

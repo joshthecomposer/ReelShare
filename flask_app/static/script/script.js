@@ -77,7 +77,7 @@ function updateOrder() {
 }
 
 function revealReelCreation() {
-    filterVal = "blur(50px)"
+    filterVal = "blur(15px)"
     $(reel_creation).fadeIn(500)
     $(blurElement).css({
         'filter':filterVal,
@@ -94,7 +94,7 @@ function revealReelCreation() {
 }
 function hideReelCreation() {
     filterVal = "blur(0)"
-    $(reel_creation).fadeOut()
+    $(reel_creation).fadeOut(500)
     $(blurElement).css({
         'filter':filterVal,
         'webkitFilter':filterVal,
@@ -107,7 +107,7 @@ function hideReelCreation() {
         '-o-transition':'all 0.5s ease-in'
     });
 }
-
+    
 function audioPlayer(element) {
     $('a.reel-a').click(function (e) {
         e.preventDefault()
