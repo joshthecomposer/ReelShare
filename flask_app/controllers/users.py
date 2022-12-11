@@ -69,3 +69,30 @@ def logout(id):
     if session['user_id'] == id:
         session.clear()
     return redirect('/')
+
+@app.route('/update_user', methods=['POST'])
+def update_user():
+    data = {
+        'id' : session['user_id'],
+        'email' : request.form['email'],
+    }
+    user_exists = user.User.email_lookup(data)
+    if not user_exists:
+        user.User.update(data)
+    user_exists =user.User.email_lookup(data)
+    if request.form['current_password'] != '':
+        if not bcrypt.check_password_hash(user_exists[0]['password'], request.form['current_password']):
+            flash('Current Password is Incorrect')
+            return redirect('/dashboard')
+        data = {
+            'password' : request.form['new_password'],
+        }
+        is_valid = user.User.validate_password_change(data)
+        if is_valid:
+            pw_hash = bcrypt.generate_password_hash(request.form['new_password'])
+            data = {
+                'id' : session['user_id'],
+                'password' : pw_hash
+            }
+            user.User.update_pw(data)
+    return redirect('/dashboard')

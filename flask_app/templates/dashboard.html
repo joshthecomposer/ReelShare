@@ -41,10 +41,30 @@
         <div  id="settings" class="container" style="display:none;">
             <div class="container">
                 <div id="reg" class="hero p-5">
+                    {%with messages = get_flashed_messages()%}
+                    {%if messages%}
+                        {%for message in messages%}
+                            <p class="flashed">{{message}}</p>
+                        {%endfor%}
+                    {%endif%}
+                    {%endwith%}
                 <h2 class="form-h2">SETTINGS</h2>
-                    <button id="revealReelCreationButton" class="button-5" onclick="deleteUser()">DELETE YOUR ACCOUNT</button>
-                    <button id="revealReelCreationButton" class="button-4" onclick="hideSettings()">BACK</button>
+                <p style="margin-bottom: 2rem;">{{session['username']}}</p>
+                <div class="form-group">
+                    <form action="/update_user" method="POST">
+                        <label for="email">Change Email:</label>
+                        <input class="form-control" type="text" name="email" value="{{one_user.email}}">
+                        <label for="current_password">Change Password:</label>
+                        <input type="password" class="form-control" name="current_password" placeholder="Current Password">
+                        <input type="password" class="form-control" name="new_password" placeholder="New Password">
+                        <button type="submit" class="button-3">SUBMIT</button>
+                    </form>
                 </div>
+                <div>
+                    <button id="revealReelCreationButton" class="button-5" onclick="deleteUser()">DELETE YOUR ACCOUNT</button>
+                </div>
+                <button id="revealReelCreationButton" class="button-4" onclick="hideSettings()">BACK</button>
+            </div>
             </div>
         </div>
         <div id="blur">
@@ -109,7 +129,6 @@
                                     </form>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>

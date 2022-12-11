@@ -38,6 +38,17 @@ class User:
                 flash('Password must contain one number, one uppercase letter, and one lowercase letter')
                 is_valid = False
         return is_valid
+    @staticmethod
+    def validate_password_change(data):
+        is_valid = True
+        if len(data['password']) < 4:
+            flash('Password must be at least 4 characters')
+            is_valid = False
+        if len(data['password']) >= 4:
+            if not PASSWORD_REGEX.match(data['password']):
+                flash('Password must contain one number, one uppercase letter, and one lowercase letter')
+                is_valid = False
+        return is_valid
     
     @classmethod
     def check_user_info(cls, data):
@@ -92,3 +103,19 @@ class User:
         connectToMySQL(DB).query_db(query, data)
         print("DELETE QUERY COMPLETE")
         return
+    
+    @classmethod
+    def get_one_user(cls, data):
+        query = """SELECT id, username, email FROM users WHERE id = %(user_id)s;"""
+        return connectToMySQL(DB).query_db(query, data)
+    
+    @classmethod
+    def update(cls, data):
+        query = """UPDATE users SET email = %(email)s WHERE id = %(id)s"""
+        result = connectToMySQL(DB).query_db(query, data)
+        return result
+    
+    @classmethod
+    def update_pw(cls,data):
+        query = """UPDATE users SET password = %(password)s WHERE id = %(id)s;"""
+        return connectToMySQL(DB).query_db(query, data)

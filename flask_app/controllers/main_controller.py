@@ -2,6 +2,7 @@ import os, uuid
 from flask_app import app
 from flask import render_template, redirect, request, flash, url_for, session
 from flask_app.models.file import File
+from flask_app.models import user
 from flask_app.models import reel
 from werkzeug.utils import secure_filename
 
@@ -49,10 +50,11 @@ def dashboard():
     
     if not all_reels:
         all_reels = reel.Reel.get_reels(data)
-        return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
+        one_user = user.User.get_one_user(data)[0]
+        return render_template('dashboard.html', all_files=all_files, all_reels=all_reels, one_user = one_user)
     one_user = all_reels
     all_reels = all_reels.reels
-    return render_template('dashboard.html', all_files=all_files, all_reels=all_reels)
+    return render_template('dashboard.html', all_files=all_files, all_reels=all_reels, one_user=one_user)
 
 @app.route('/clear')
 def clear_session():
