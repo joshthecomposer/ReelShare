@@ -2,6 +2,7 @@ let blurElement = document.querySelector('#blur');
 let reel_creation = document.getElementById('reel_creation');
 let loginElement = document.getElementById('login');
 let regElement = document.getElementById('registration');
+let settingsElement = document.getElementById('settings');
 let isBlurry = false;
 let reel_view = false;
 
@@ -90,9 +91,11 @@ function revealLogin() {
             $(loginElement).fadeIn(500)
         }, 500)
         $(regElement).fadeOut(500)
+        $(settingsElement).fadeOut(500)
     } else {
         $(loginElement).fadeIn(500)
         $(regElement).fadeOut(500)
+        $(settingsElement).fadeOut(500)
         $(blurElement).css({
             'filter':filterVal,
             'webkitFilter':filterVal,
@@ -114,9 +117,11 @@ function revealReg() {
             $(regElement).fadeIn(500)
         }, 500)
         $(loginElement).fadeOut(500)
+        $(settingsElement).fadeOut(500)
     } else {
         $(regElement).fadeIn(500)
         $(loginElement).fadeOut(500)
+        $(settingsElement).fadeOut(500)
         $(blurElement).css({
             'filter':filterVal,
             'webkitFilter':filterVal,
@@ -129,6 +134,49 @@ function revealReg() {
             '-o-transition':'all 0.5s ease-in'
         });
     }
+};
+
+function settings() {
+    filterVal = "blur(15px)"
+    if (isBlurry == true) {
+        setTimeout(function () { 
+            $(settingsElement).fadeIn(500)
+        }, 500)
+        $(loginElement).fadeOut(500)
+        $(regElement).fadeOut(500)
+    } else {
+        $(settingsElement).fadeIn(500)
+        $(loginElement).fadeOut(500)
+        $(regElement).fadeOut(500)
+        $(blurElement).css({
+            'filter':filterVal,
+            'webkitFilter':filterVal,
+            'mozFilter':filterVal,
+            'oFilter':filterVal,
+            'msFilter': filterVal,
+            'transition':'all 0.5s ease-in',
+            '-webkit-transition':'all 0.5s ease-in',
+            '-moz-transition':'all 0.5s ease-in',
+            '-o-transition':'all 0.5s ease-in'
+        });
+    }
+};
+
+function hideSettings() {
+    filterVal = "blur(0)"
+    $(settingsElement).fadeOut(500)
+    $(blurElement).css({
+        'filter':filterVal,
+        'webkitFilter':filterVal,
+        'mozFilter':filterVal,
+        'oFilter':filterVal,
+        'msFilter':filterVal,
+        'transition':'all 0.5s ease-in',
+        '-webkit-transition':'all 0.5s ease-in',
+        '-moz-transition':'all 0.5s ease-in',
+        '-o-transition':'all 0.5s ease-in'
+    });
+    isBlurry = false;
 };
 
 function hideReelCreation() {
@@ -253,6 +301,17 @@ function deleteFile(file) {
         method: "POST",
         url: "/delete_file",
         data: data,
+        cache: false,
+        success: function () {
+            location.reload()
+        }
+    })
+}
+
+function deleteUser() {
+    $.ajax({
+        method: "POST",
+        url: "/delete",
         cache: false,
         success: function () {
             location.reload()

@@ -1,6 +1,6 @@
 from flask_app import app
 from flask import render_template, redirect, request, flash, url_for, session
-from flask_app.models import user
+from flask_app.models import user, reel
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 
@@ -54,10 +54,11 @@ def view_register():
 def view_login():
     return render_template('view_login.html')
 
-@app.route('/delete')
+@app.route('/delete', methods=['POST'])
 def delete_user():
     data = {
-        'one_user' : session['current_user']
+        'user_id' : session['user_id']
     }
+    user.User.delete(data)
     return redirect('/clear')
 

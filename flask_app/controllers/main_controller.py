@@ -60,11 +60,3 @@ def dashboard():
 def clear_session():
     session.clear()
     return redirect('/')
-
-@app.route('/reel_view')
-def reel_view():
-    return render_template('reel_view.html')
-
-@app.route('/landing')
-def landing():
-    return render_template('landing.html')

@@ -16,6 +16,7 @@
             <h1>SoundFlask.io</h1>
             <p>{{session['username']}}'s</p>
             <p>DASHBOARD</p>
+            <a onclick="settings()">SETTINGS</a>
             <a href="/clear">LOGOUT</a>
         </div>
     </nav>
@@ -34,6 +35,15 @@
                         </form>
                         <button id="revealReelCreationButton" class="button-4" onclick="hideReelCreation()">BACK</button>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div  id="settings" class="container" style="display:none;">
+            <div class="container">
+                <div id="reg" class="hero p-5">
+                <h2 class="form-h2">SETTINGS</h2>
+                    <button id="revealReelCreationButton" class="button-5" onclick="deleteUser()">DELETE YOUR ACCOUNT</button>
+                    <button id="revealReelCreationButton" class="button-4" onclick="hideSettings()">BACK</button>
                 </div>
             </div>
         </div>

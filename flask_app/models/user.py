@@ -1,6 +1,7 @@
 import os, re
-from flask import flash
+from flask import flash, session
 from flask_app.config.mysqlconnection import connectToMySQL
+from flask_app.models import reel
 
 ALLOWED_EXTENSIONS = {'wav', 'mp3', 'aif'}
 DB = 'soundflaskio_schema'
@@ -51,11 +52,29 @@ class User:
     @classmethod
     def save(cls, data):
         folder = f'flask_app/static/users/{data["username"]}'
-        os.mkdir(folder)
+        isExist = os.path.exists(folder)
+        if not isExist:
+            os.mkdir(folder)
         query = 'INSERT INTO users (username, email, password) VALUES (%(username)s, %(email)s, %(password)s)'
         return connectToMySQL(DB).query_db(query, data)
     
     @classmethod
     def delete(cls, data):
-        pass
-        
+        one_user = reel.Reel.get_reels_with_tracks(data)
+        if one_user == ():
+            query = f'DELETE FROM users WHERE id = {session["user_id"]};'
+            return connectToMySQL(DB).query_db(query)
+        for r in one_user.reels:
+            for t in r.tracks:
+                query = f"DELETE FROM reel_list WHERE file_id = {t['id']};"
+                connectToMySQL(DB).query_db(query)
+                query = f"DELETE FROM files WHERE id = {t['id']};"
+                result = connectToMySQL(DB).query_db(query)
+                print("RESULT OF FILE DELETION", result)
+                isExist = os.path.exists(f'flask_app/static/{t["path"]}')
+                if isExist:
+                    os.remove(f'flask_app/static/{t["path"]}')
+            query = f'DELETE FROM reels WHERE id = {r.id}'
+            connectToMySQL(DB).query_db(query)
+        query = f'DELETE FROM users WHERE id = {session["user_id"]};'
+        return connectToMySQL(DB).query_db(query)

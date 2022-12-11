@@ -31,6 +31,16 @@ body {
     border-radius: 15px;
     transform: translate(-50%, -50%);
 }
+#settings {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    margin: auto;
+    background-color: rgba(19,17,28,1);
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+}
 
 nav {
     background-color: rgba(19,17,28,1);
@@ -186,6 +196,19 @@ nav h1 {
 }
 
 .button-5:hover {
+    background-color: #964545;
+    cursor: pointer;
+}
+.button-6 {
+    display: flex;
+    background-color: #9e2929;
+    color: white;
+    padding: .5rem .5rem;
+    font-family: Lato;
+    border-radius: 5px;
+}
+
+.button-6:hover {
     background-color: #964545;
     cursor: pointer;
 }
