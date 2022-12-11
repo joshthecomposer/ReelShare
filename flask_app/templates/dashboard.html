@@ -17,7 +17,7 @@
             <p>{{session['username']}}'s</p>
             <p>DASHBOARD</p>
             <a onclick="settings()">SETTINGS</a>
-            <a href="/clear">LOGOUT</a>
+            <a href="/user/logout/{{session['user_id']}}">LOGOUT</a>
         </div>
     </nav>
     <main>
@@ -81,7 +81,7 @@
                         </div>
                         <div class="column tracks">
                             <h2>YOUR TRACKS</h2>
-                            <ul>
+                            <ul id="track-list">
                             {%for f in all_files%}
                                 <li id="{{f.id}}" class="track-container draggable">
                                         <button id="play-icon" onclick="audioPlayer(this)">

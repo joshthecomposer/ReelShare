@@ -568,3 +568,8 @@ audio::-webkit-media-controls-play-button {
     background-color: transparent;
     justify-self: flex-end;
 }
+
+.flashed {
+    color: red;
+    margin-bottom: 2rem;
+}

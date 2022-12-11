@@ -108,3 +108,31 @@ class Reel:
         connectToMySQL(DB).query_db(query2, data)
         connectToMySQL(DB).query_db(query, data)
         return False
+    
+    @classmethod
+    def get_guest_view(cls, data):
+        query = "SELECT * FROM reels JOIN reel_list on reels.id = reel_list.reel_id JOIN files ON files.id = reel_list.file_id WHERE reels.id = %(id)s ORDER BY reel_list._order"
+        result = connectToMySQL(DB).query_db(query, data)
+        print(result)
+        data = {
+            'id' : result[0]['id'],
+            'user_id' : result[0]['user_id'],
+            'name' : result[0]['name'],
+            'created_at' : result[0]['created_at'],
+            'updated_at' : result[0]['updated_at']
+        }
+        one_reel = cls(data)
+        print(one_reel)
+        for r in result:
+            data = {
+                'id' : r['files.id'],
+                'user_id' : r['user_id'],
+                'title' : r['title'],
+                'path' : r['path'],
+                'order' : r['files._order'],
+                'created_at' : r['files.created_at'],
+                'updated_at' : r['files.updated_at']
+            }
+            one_file = file.File(data)
+            one_reel.tracks.append(one_file)
+        return one_reel

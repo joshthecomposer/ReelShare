@@ -16,7 +16,7 @@
             <h1>SoundFlask.io</h1>
             <p>{{session['username']}}</p>
             <a href="/dashboard"><p>DASHBOARD</p></a>
-            <a href="/clear">LOGOUT</a>
+            <a href="/user/logout/{{session['user_id']}}">LOGOUT</a>
         </div>
     </nav>
     <main>

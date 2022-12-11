@@ -18,7 +18,8 @@ $(function () {
                 data: item_order,
                 cache: false,
                 success: function (data) {
-                    location.reload();
+                    // location.reload();
+                    return false;
                 }
             })
         }
@@ -28,7 +29,7 @@ $(function () {
 $( function() {
     $(".draggable").draggable({
         helper: "clone",
-        revert: 'invalid'
+        revert: 'invalid',
     });
     $(".droppable").droppable({
         drop: function (event, ui) {
@@ -37,6 +38,9 @@ $( function() {
                     return false;
                 }
             }
+            let html = $(ui.draggable.clone(true))
+            html = html[0]
+            document.querySelector('#track-list').append(html)
             if (event.target.children[0].id == 'reel-placeholder') {
                 event.target.children[0].remove()
             }
@@ -52,7 +56,6 @@ $( function() {
                 },
                 cache: false,
                 success: function () {
-                    location.reload()
                     return false;
                 }
             })

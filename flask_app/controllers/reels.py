@@ -37,14 +37,21 @@ def save_track_to_reel():
 
 @app.route("/reel/view/<int:id>")
 def reeL_view(id):
-    data = {
-        "user_id" : session['user_id']
-    }
-    one_user = reel.Reel.get_reels_with_tracks(data)
-    for r in one_user.reels:
-        if r.id == id:
-            one_reel = r
-    session['reel_id'] = one_reel.id
+    if 'user_id' in session:
+        data = {
+            "user_id" : session['user_id']
+        }
+        one_user = reel.Reel.get_reels_with_tracks(data)
+        for r in one_user.reels:
+            if r.id == id:
+                one_reel = r
+        session['reel_id'] = one_reel.id
+    else:
+        data = {
+            'id' : id
+        }
+        one_reel = reel.Reel.get_guest_view(data)
+        return render_template('guest_view.html', one_reel=one_reel)
     return render_template('reel_view.html', one_reel = one_reel)
 
 @app.route('/reveal_reel_creation_box', methods=['POST'])

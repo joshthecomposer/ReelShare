@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/custom/style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="{{ url_for('static', filename='script/script.js') }}" defer></script>
+    <title>{{session['username']}} Reel View</title>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h1>SoundFlask.io</h1>
+        </div>
+    </nav>
+    <main>
+        <div class="container">
+            <div class="d-container">
+                    <div class="column">
+                            <h2>{{one_reel.name}} OVERVIEW</h2>
+                            <ul style="min-width:400px; min-height: 2000px;">
+                                {%for f in one_reel.tracks%}
+                                <li id="{{f.id}}" class="track-container-reel">
+                                    <button id="play-icon-reel" onclick="audioPlayerReel(this)">
+                                        <audio class="track" src="{{ url_for('static', filename=f.path) }}">
+                                    </button>
+                                    <p class="track-title-reel">{{f.title}}</p>
+                                    <div class="progBarBox-reel">
+                                        <div class="progBar-reel" id='{{"progBar-" + f.id|string}}'></div>
+                                    </div>
+                                </li>
+                                {%endfor%}
+                            </ul>
+                    </div>
+                </div>
+            </div>
+    </main>
+</body>
+</html>

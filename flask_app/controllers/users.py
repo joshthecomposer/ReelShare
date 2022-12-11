@@ -62,3 +62,10 @@ def delete_user():
     user.User.delete(data)
     return redirect('/clear')
 
+@app.route('/user/logout/<int:id>')
+def logout(id):
+    if 'user_id' not in session:
+        return redirect('/')
+    if session['user_id'] == id:
+        session.clear()
+    return redirect('/')
