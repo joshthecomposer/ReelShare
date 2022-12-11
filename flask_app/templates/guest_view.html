@@ -20,7 +20,8 @@
         <div class="container">
             <div class="d-container">
                     <div class="column">
-                            <h2>{{one_reel.name}} OVERVIEW</h2>
+                        <h1>{{one_reel.name}}</h1>
+                        <p>by {{one_user.username}}</p>
                             <ul style="min-width:400px; min-height: 2000px;">
                                 {%for f in one_reel.tracks%}
                                 <li id="{{f.id}}" class="track-container-reel">

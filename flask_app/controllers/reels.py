@@ -50,9 +50,11 @@ def reeL_view(id):
         data = {
             'id' : id
         }
-        one_reel = reel.Reel.get_guest_view(data)
-        return render_template('guest_view.html', one_reel=one_reel)
-    return render_template('reel_view.html', one_reel = one_reel)
+        list = reel.Reel.get_guest_view(data)
+        one_reel = list[0]
+        one_user = list[1]
+        return render_template('guest_view.html', one_reel=one_reel, one_user = one_user)
+    return render_template('reel_view.html', one_reel = one_reel, one_user = one_user)
 
 @app.route('/reveal_reel_creation_box', methods=['POST'])
 def reel_creation_box():

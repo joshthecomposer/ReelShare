@@ -60,21 +60,35 @@ class User:
     
     @classmethod
     def delete(cls, data):
-        one_user = reel.Reel.get_reels_with_tracks(data)
-        if one_user == ():
-            query = f'DELETE FROM users WHERE id = {session["user_id"]};'
-            return connectToMySQL(DB).query_db(query)
-        for r in one_user.reels:
-            for t in r.tracks:
-                query = f"DELETE FROM reel_list WHERE file_id = {t['id']};"
-                connectToMySQL(DB).query_db(query)
-                query = f"DELETE FROM files WHERE id = {t['id']};"
-                result = connectToMySQL(DB).query_db(query)
-                print("RESULT OF FILE DELETION", result)
-                isExist = os.path.exists(f'flask_app/static/{t["path"]}')
-                if isExist:
-                    os.remove(f'flask_app/static/{t["path"]}')
-            query = f'DELETE FROM reels WHERE id = {r.id}'
-            connectToMySQL(DB).query_db(query)
-        query = f'DELETE FROM users WHERE id = {session["user_id"]};'
-        return connectToMySQL(DB).query_db(query)
+        query = """SELECT 
+                    users.id AS user_id, 
+                    files.id AS file_id, 
+                    files.path AS file_path, 
+                    reels.id AS reel_id,
+                    reel_list.file_id AS reel_list_id
+                    FROM users 
+                    LEFT JOIN files ON files.user_id = users.id 
+                    LEFT JOIN reels ON reels.user_id = users.id
+                    LEFT JOIN reel_list ON files.id = reel_list.file_id
+                    WHERE users.id = %(user_id)s"""
+        full_query = connectToMySQL(DB).query_db(query, data)
+        print("DELETE QUERY STARTED RESULT IS: ",full_query)
+        for row in full_query:
+            query = f"""DELETE FROM reel_list WHERE file_id = {row['file_id']}"""
+            result = connectToMySQL(DB).query_db(query)
+            print("DELETING REEL LIST ",result)
+        for row in full_query:
+            file_path = row['file_path']
+            isExist = os.path.exists(f'flask_app/static/{file_path}')
+            if isExist:
+                os.remove(f'flask_app/static/{file_path}')
+        query = """DELETE FROM files WHERE user_id = %(user_id)s"""
+        result = connectToMySQL(DB).query_db(query, data)
+        print("3rd DELETE QUERY RESULT IS ", result)
+        query = """DELETE FROM reels WHERE user_id = %(user_id)s"""
+        result = connectToMySQL(DB).query_db(query, data)
+        print("4th DELETE QUERY RESULT IS ", result)
+        query = """DELETE FROM users WHERE id = %(user_id)s"""
+        connectToMySQL(DB).query_db(query, data)
+        print("DELETE QUERY COMPLETE")
+        return

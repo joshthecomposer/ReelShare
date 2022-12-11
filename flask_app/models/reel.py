@@ -129,10 +129,13 @@ class Reel:
                 'user_id' : r['user_id'],
                 'title' : r['title'],
                 'path' : r['path'],
-                'order' : r['files._order'],
                 'created_at' : r['files.created_at'],
                 'updated_at' : r['files.updated_at']
             }
             one_file = file.File(data)
             one_reel.tracks.append(one_file)
-        return one_reel
+        query = f"SELECT id, username FROM users WHERE id = {one_reel.user_id}"
+        one_user = connectToMySQL(DB).query_db(query, data)
+        list = [one_reel, one_user[0]]
+        print(list)
+        return list
