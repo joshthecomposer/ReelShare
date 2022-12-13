@@ -321,3 +321,10 @@ function deleteUser() {
         }
     })
 }
+
+function hideFlash() {
+    let e = document.getElementById('messages')
+    e.style.display = 'none';
+} 
+
+

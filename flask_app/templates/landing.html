@@ -21,13 +21,6 @@
         <main>
             <div id="login" class="container" style="display:none;">
                 <div id="reg" class="hero p-5">
-                    {%with messages = get_flashed_messages()%}
-                        {%if messages%}
-                            {%for message in messages%}
-                                <p class="flashed">{{message}}</p>
-                            {%endfor%}
-                        {%endif%}
-                    {%endwith%}
                     <h2 class="form-h2">LOGIN</h2>
                     <hr>
                     <div class="form-group">
@@ -50,13 +43,6 @@
             </div>
             <div id='registration' class="container" style="display:none;">
                 <div id="reg" class="hero p-5">
-                    {%with messages = get_flashed_messages()%}
-                        {%if messages%}
-                            {%for message in messages%}
-                                <p class="text-danger">{{message}}</p>
-                            {%endfor%}
-                        {%endif%}
-                    {%endwith%}
                     <h2 class="form-h2">LET'S GET STARTED</h2>
                     <div class="form-group">
                         <form action="/register" method="POST">
@@ -86,9 +72,22 @@
                 </div>
             </div>
         </div>
+        {%with messages = get_flashed_messages()%}
+            {%if messages%}
+            <div id="messages" class="container">
+                <div id="reg" class="hero p-5">
+                    {%for message in messages%}
+                    <p class="text-danger">{{message}}</p>
+                    <button id="revealReelCreationButton" class="button-4" onclick="hideFlash()">BACK</button>
+                {%endfor%}
+                </div>
+            </div>
+            {%endif%}
+        {%endwith%}
         <div id="blur">
             <div class="container">
                 <div class="hero">
+
                     <h1>BRING YOUR AUDIO</h1>
                     <h1>DESIGN STUNNING REELS</h1>
                     <h1>LAND THAT GIG</h1>

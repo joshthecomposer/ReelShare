@@ -504,6 +504,16 @@ audio::-webkit-media-controls-play-button {
     border-radius: 15px;
     transform: translate(-50%, -50%);
 }
+#messages{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 9999;
+    margin: auto;
+    background-color: rgba(19,17,28,1);
+    border-radius: 15px;
+    transform: translate(-50%, -50%);
+}
 
 /* reel view audio player stuff */
 
@@ -572,4 +582,8 @@ audio::-webkit-media-controls-play-button {
 .flashed {
     color: red;
     margin-bottom: 2rem;
+}
+
+.text-danger {
+    color: red;
 }
