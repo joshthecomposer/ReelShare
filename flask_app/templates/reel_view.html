@@ -29,7 +29,7 @@
                                 {%for f in one_reel.tracks%}
                                 <li id="{{f.id}}" class="track-container-reel">
                                     <button id="play-icon-reel" onclick="audioPlayerReel(this)" preload="none">
-                                        <audio class="track" src="{{ url_for('static', filename=f.path) }}">
+                                        <audio class="track" src="{{f.path}}">
                                     </button>
                                     <p class="track-title-reel">{{f.title}}</p>
                                     <div class="progBarBox-reel">
