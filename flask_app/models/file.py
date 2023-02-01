@@ -66,6 +66,7 @@ class File:
         query = "DELETE FROM reel_list WHERE file_id = %(id)s;"
         result = connectToMySQL(DB).query_db(query, data)
         query = "DELETE FROM files WHERE id = %(id)s AND user_id = %(user_id)s;"
-        
-        os.remove(f'flask_app/static/{_path}')
+
+        #TODO: allow file removal from S3
+        # os.remove(f'flask_app/static/{_path}')
         return connectToMySQL(DB).query_db(query, data)
