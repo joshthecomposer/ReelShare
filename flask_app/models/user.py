@@ -84,11 +84,6 @@ class User:
             query = f"""DELETE FROM reel_list WHERE file_id = {row['file_id']}"""
             result = connectToMySQL(DB).query_db(query)
             print("DELETING REEL LIST ",result)
-        for row in full_query:
-            file_path = row['file_path']
-            isExist = os.path.exists(f'flask_app/static/{file_path}')
-            if isExist:
-                os.remove(f'flask_app/static/{file_path}')
         query = """DELETE FROM files WHERE user_id = %(user_id)s"""
         result = connectToMySQL(DB).query_db(query, data)
         print("3rd DELETE QUERY RESULT IS ", result)

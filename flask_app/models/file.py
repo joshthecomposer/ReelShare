@@ -67,6 +67,4 @@ class File:
         result = connectToMySQL(DB).query_db(query, data)
         query = "DELETE FROM files WHERE id = %(id)s AND user_id = %(user_id)s;"
 
-        #TODO: allow file removal from S3
-        # os.remove(f'flask_app/static/{_path}')
         return connectToMySQL(DB).query_db(query, data)
