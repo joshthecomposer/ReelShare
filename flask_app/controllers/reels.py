@@ -1,4 +1,4 @@
-from flask_app import app
+from flask_app import application as app
 from flask import render_template, redirect, request, flash, url_for, session, jsonify
 from flask_app.models import reel, file
 
