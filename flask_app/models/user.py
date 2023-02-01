@@ -62,10 +62,6 @@ class User:
     
     @classmethod
     def save(cls, data):
-        folder = f'flask_app/static/users/{data["username"]}'
-        isExist = os.path.exists(folder)
-        if not isExist:
-            os.mkdir(folder)
         query = 'INSERT INTO users (username, email, password) VALUES (%(username)s, %(email)s, %(password)s)'
         return connectToMySQL(DB).query_db(query, data)
     
