@@ -1,4 +1,5 @@
 from flask import Flask
+from os import environ
 
-app = Flask(__name__)
-app.secret_key = 'secret key'
+application = Flask(__name__)
+application.secret_key = environ.get('SECRET_KEY')

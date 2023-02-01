@@ -1,9 +1,10 @@
 import pymysql.cursors
+from os import environ
 class MySQLConnection:
     def __init__(self, db):
-        connection = pymysql.connect(host = 'localhost',
-                                    user = 'root', # change the user and password as needed
-                                    password = 'root', 
+        connection = pymysql.connect(host = environ.get('MYSQL_HOST'),
+                                    user = environ.get("MYSQL_USER"), # change the user and password as needed
+                                    password = environ.get("MYSQL_PASS"), 
                                     db = db,
                                     charset = 'utf8mb4',
                                     cursorclass = pymysql.cursors.DictCursor,
