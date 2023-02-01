@@ -5,6 +5,13 @@ from flask_app.models.file import File
 from flask_app.models import user
 from flask_app.models import reel
 from werkzeug.utils import secure_filename
+import boto3, botocore
+
+s3 = boto3.client(
+    "s3",
+    aws_access_key_id=app.config['S3_KEY'],
+    aws_secret_access_key=app.config['S3_SECRET']
+)
 
 @app.route('/')
 def index():
@@ -16,7 +23,6 @@ def index():
 def dashboard():
     if 'username' not in session:
         return redirect('/')
-    app.config['UPLOAD_FOLDER'] = f'flask_app/static/users/{session["username"]}'
     if request.method == 'POST':
         if request.form['title'] == '':
             flash('Please enter a title')
@@ -34,13 +40,25 @@ def dashboard():
         if file and File.allowed_file(file.filename):
             filename = secure_filename(file.filename)
             filename = str(session['user_id']) + "_" +  str(uuid.uuid4()) + "_" + filename
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            data = {
-                'user_id' : session['user_id'],
-                'title' : request.form['title'],
-                'path' : f'users/{session["username"]}/{filename}'
-            }
-            File.save(data)
+            file.filename = filename
+        try:
+            s3.upload_fileobj(
+                file,
+                app.config['S3_BUCKET'],
+                file.filename,
+            )
+            location = "{}{}".format(app.config["S3_LOCATION"], file.filename)
+            print(location)
+            flash('success!')
+        except Exception as e:
+            print("Something Happened: ", e)
+            return e
+        data = {
+            'user_id' : session['user_id'],
+            'title' : request.form['title'],
+            'path' : f"{app.config['CLOUDFRONT_URL']}/{file.filename}"
+        }
+        File.save(data)
         return redirect('/dashboard')
     data = {
         'user_id' : session['user_id']
