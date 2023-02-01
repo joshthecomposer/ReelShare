@@ -10,6 +10,8 @@ flask-bcrypt = "*"
 gunicorn = "*"
 cryptography = "*"
 python-dotenv = "*"
+boto3 = "*"
+flask-s3 = "*"
 
 [dev-packages]
 
