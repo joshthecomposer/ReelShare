@@ -1,5 +1,6 @@
 # SoundFlask.io
-*Live Link [Here](http://soundflaskio-env.eba-2dzjfmba.us-east-1.elasticbeanstalk.com/)*
+**Live Link [Here](http://soundflaskio-env.eba-2dzjfmba.us-east-1.elasticbeanstalk.com/)**
+
 This is an audio reel creation and sharing app for composers and producers.
 
 ### Objectives:
