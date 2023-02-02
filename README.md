@@ -1,7 +1,6 @@
 # SoundFlask.io
-This is a reel creation and sharing app for composers and producers.
-
-Live Link [Here](http://soundflaskio-env.eba-2dzjfmba.us-east-1.elasticbeanstalk.com/)
+*Live Link [Here](http://soundflaskio-env.eba-2dzjfmba.us-east-1.elasticbeanstalk.com/)*
+This is an audio reel creation and sharing app for composers and producers.
 
 ### Objectives:
 * User can create multiple reels which contain multiple audio files. Each reel's view page will have a 4 digit pin--specified by the user--allowing the user to curate each reel to certain clients.
